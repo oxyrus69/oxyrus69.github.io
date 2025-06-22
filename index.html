@@ -43,23 +43,23 @@
         }
         /* Gaya untuk efek kursor mengetik */
         .typing-text {
-            overflow: hidden; /* Pastikan teks tidak meluap */
-            border-right: .15em solid #63b3ed; /* Efek kursor mengetik */
+            overflow: hidden; /* Pastikan teks tidak meluap jika terlalu panjang */
             white-space: nowrap; /* Teks dalam satu baris */
             margin: 0 auto; /* Tengah */
             letter-spacing: .15em; /* Jarak antar huruf */
-            animation:
-                typing 3.5s steps(40, end),
-                blink-caret .75s step-end infinite;
+            border-right: .15em solid transparent; /* Awalnya transparan */
+            width: 0; /* Mulai dari lebar 0 */
+            opacity: 1; /* Pastikan teks terlihat saat animasi */
+            /* Transisi akan diatur oleh JavaScript */
         }
 
-        /* Animasi mengetik */
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
+        /* Animasi kedip kursor, diterapkan setelah animasi mengetik selesai */
+        .typing-text.blink-active {
+            border-right-color: #63b3ed; /* Jadikan kursor terlihat */
+            animation: blink-caret .75s step-end infinite;
         }
 
-        /* Animasi kedip kursor */
+        /* Keyframes untuk animasi kedip kursor */
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: #63b3ed; }
@@ -257,15 +257,15 @@
                 Tertarik untuk berkolaborasi atau hanya ingin menyapa? Jangan ragu untuk menghubungi saya melalui saluran berikut:
             </p>
             <div class="flex justify-center space-x-6 text-gray-300">
-                <a href="endriojn@gmail.com" class="flex flex-col items-center hover:text-white transition duration-300">
+                <a href="mailto:emailanda@example.com" class="flex flex-col items-center hover:text-white transition duration-300">
                     <i data-lucide="mail" class="w-8 h-8 mb-2"></i>
                     <span class="text-sm">Email</span>
                 </a>
-                <a href="https://t.me/sleepvessel" target="_blank" class="flex flex-col items-center hover:text-white transition duration-300">
+                <a href="https://t.me/yourtelegramusername" target="_blank" class="flex flex-col items-center hover:text-white transition duration-300">
                     <i data-lucide="send" class="w-8 h-8 mb-2"></i>
                     <span class="text-sm">Telegram</span>
                 </a>
-                <a href="https://instagram.com/d1ednow" target="_blank" class="flex flex-col items-center hover:text-white transition duration-300">
+                <a href="https://instagram.com/yourinstagramusername" target="_blank" class="flex flex-col items-center hover:text-white transition duration-300">
                     <i data-lucide="instagram" class="w-8 h-8 mb-2"></i>
                     <span class="text-sm">Instagram</span>
                 </a>
@@ -283,21 +283,66 @@
     </footer>
 
     <script>
-        // Menginisialisasi ikon Lucide
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Menginisialisasi ikon Lucide
+            lucide.createIcons();
 
-        // Mengatur tahun saat ini di footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+            // Mengatur tahun saat ini di footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Smooth scrolling untuk navigasi
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            // Smooth scrolling untuk navigasi
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); // Memperbaiki kesalahan di sini
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
+
+            // Efek pengetikan untuk teks hero
+            const typingTextElement = document.querySelector('.typing-text');
+            if (typingTextElement) {
+                // Simpan teks asli
+                const originalText = typingTextElement.textContent;
+                typingTextElement.textContent = ''; // Hapus teks untuk pengukuran sementara
+
+                // Untuk mengukur lebar penuh teks, kita menempatkannya sementara di elemen tersembunyi
+                const measureDiv = document.createElement('div');
+                measureDiv.style.visibility = 'hidden';
+                measureDiv.style.position = 'absolute';
+                measureDiv.style.whiteSpace = 'nowrap';
+                // Pastikan gaya font sesuai dengan elemen typing-text
+                measureDiv.style.fontSize = window.getComputedStyle(typingTextElement).fontSize;
+                measureDiv.style.fontFamily = window.getComputedStyle(typingTextElement).fontFamily;
+                measureDiv.style.letterSpacing = window.getComputedStyle(typingTextElement).letterSpacing;
+                measureDiv.textContent = originalText;
+                document.body.appendChild(measureDiv);
+                const targetWidth = measureDiv.offsetWidth; // Dapatkan lebar aktual teks
+                document.body.removeChild(measureDiv); // Hapus div sementara
+
+                // Reset elemen typingTextElement untuk animasi
+                typingTextElement.textContent = originalText; // Kembalikan teks
+                typingTextElement.style.width = '0'; // Mulai dengan lebar 0
+                typingTextElement.style.opacity = '1'; // Pastikan terlihat
+
+                const animationDuration = 3.5; // Durasi animasi (detik)
+                const steps = originalText.length; // Jumlah langkah untuk efek mengetik
+
+                // Atur transisi untuk efek mengetik
+                typingTextElement.style.transition = `width ${animationDuration}s steps(${steps}, end)`;
+
+                // Picu animasi setelah sedikit penundaan
+                setTimeout(() => {
+                    typingTextElement.style.width = `${targetWidth}px`;
+                }, 100);
+
+                // Tambahkan kursor berkedip setelah animasi mengetik selesai
+                setTimeout(() => {
+                    typingTextElement.style.transition = ''; // Hapus transisi lebar
+                    typingTextElement.classList.add('blink-active');
+                }, animationDuration * 1000 + 50); // Tambahkan sedikit buffer waktu
+            }
         });
     </script>
 </body>

@@ -1,0 +1,5 @@
+PUSH GITHUB:
+
+git add .
+git commit -m "Deskripsi perubahan"
+git push origin main
