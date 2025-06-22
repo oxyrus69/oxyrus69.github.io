@@ -43,14 +43,14 @@
         }
         /* Gaya untuk efek kursor mengetik */
         .typing-text {
-            overflow: hidden; /* Pastikan teks tidak meluap jika terlalu panjang */
+            overflow: hidden; /* Pastikan teks tidak meluap */
             white-space: nowrap; /* Teks dalam satu baris */
             margin: 0 auto; /* Tengah */
             letter-spacing: .15em; /* Jarak antar huruf */
-            border-right: .15em solid transparent; /* Awalnya transparan */
-            width: 0; /* Mulai dari lebar 0 */
-            opacity: 1; /* Pastikan teks terlihat saat animasi */
-            /* Transisi akan diatur oleh JavaScript */
+            border-right: .15em solid transparent; /* Kursor awalnya transparan */
+            opacity: 1; /* Pastikan elemen terlihat */
+            display: inline-block; /* Penting agar width dihitung dengan benar saat typing */
+            max-width: 100%; /* Pastikan tidak melebihi lebar kontainer */
         }
 
         /* Animasi kedip kursor, diterapkan setelah animasi mengetik selesai */
@@ -100,7 +100,8 @@
             <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight">
                 Halo, saya <span class="text-blue-400">Julian</span>.
             </h1>
-            <p class="text-2xl md:text-4xl text-gray-300 font-mono typing-text">
+            <!-- Mengubah ukuran font untuk responsivitas yang lebih baik -->
+            <p class="text-xl sm:text-2xl md:text-4xl text-gray-300 font-mono typing-text">
                 &gt; Pengembang Perangkat Lunak | Pembelajar Abadi
             </p>
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
@@ -293,7 +294,7 @@
             // Smooth scrolling untuk navigasi
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); // Memperbaiki kesalahan di sini
+                    e.preventDefault();
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
@@ -303,45 +304,22 @@
             // Efek pengetikan untuk teks hero
             const typingTextElement = document.querySelector('.typing-text');
             if (typingTextElement) {
-                // Simpan teks asli
                 const originalText = typingTextElement.textContent;
-                typingTextElement.textContent = ''; // Hapus teks untuk pengukuran sementara
+                typingTextElement.textContent = ''; // Kosongkan teks awal
+                let i = 0;
+                const typingSpeed = 75; // Kecepatan mengetik dalam ms per karakter
 
-                // Untuk mengukur lebar penuh teks, kita menempatkannya sementara di elemen tersembunyi
-                const measureDiv = document.createElement('div');
-                measureDiv.style.visibility = 'hidden';
-                measureDiv.style.position = 'absolute';
-                measureDiv.style.whiteSpace = 'nowrap';
-                // Pastikan gaya font sesuai dengan elemen typing-text
-                measureDiv.style.fontSize = window.getComputedStyle(typingTextElement).fontSize;
-                measureDiv.style.fontFamily = window.getComputedStyle(typingTextElement).fontFamily;
-                measureDiv.style.letterSpacing = window.getComputedStyle(typingTextElement).letterSpacing;
-                measureDiv.textContent = originalText;
-                document.body.appendChild(measureDiv);
-                const targetWidth = measureDiv.offsetWidth; // Dapatkan lebar aktual teks
-                document.body.removeChild(measureDiv); // Hapus div sementara
-
-                // Reset elemen typingTextElement untuk animasi
-                typingTextElement.textContent = originalText; // Kembalikan teks
-                typingTextElement.style.width = '0'; // Mulai dengan lebar 0
-                typingTextElement.style.opacity = '1'; // Pastikan terlihat
-
-                const animationDuration = 3.5; // Durasi animasi (detik)
-                const steps = originalText.length; // Jumlah langkah untuk efek mengetik
-
-                // Atur transisi untuk efek mengetik
-                typingTextElement.style.transition = `width ${animationDuration}s steps(${steps}, end)`;
-
-                // Picu animasi setelah sedikit penundaan
-                setTimeout(() => {
-                    typingTextElement.style.width = `${targetWidth}px`;
-                }, 100);
-
-                // Tambahkan kursor berkedip setelah animasi mengetik selesai
-                setTimeout(() => {
-                    typingTextElement.style.transition = ''; // Hapus transisi lebar
-                    typingTextElement.classList.add('blink-active');
-                }, animationDuration * 1000 + 50); // Tambahkan sedikit buffer waktu
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        typingTextElement.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, typingSpeed);
+                    } else {
+                        // Setelah semua teks diketik, tambahkan kelas untuk kursor berkedip
+                        typingTextElement.classList.add('blink-active');
+                    }
+                }
+                typeWriter(); // Mulai animasi
             }
         });
     </script>
