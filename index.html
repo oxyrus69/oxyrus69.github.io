@@ -41,28 +41,13 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        /* Gaya untuk efek kursor mengetik */
-        .typing-text {
-            overflow: hidden; /* Pastikan teks tidak meluap */
-            white-space: nowrap; /* Teks dalam satu baris */
-            margin: 0 auto; /* Tengah */
-            letter-spacing: .15em; /* Jarak antar huruf */
-            border-right: .15em solid transparent; /* Kursor awalnya transparan */
-            opacity: 1; /* Pastikan elemen terlihat */
-            display: inline-block; /* Penting agar width dihitung dengan benar saat typing */
-            max-width: 100%; /* Pastikan tidak melebihi lebar kontainer */
-        }
-
-        /* Animasi kedip kursor, diterapkan setelah animasi mengetik selesai */
-        .typing-text.blink-active {
-            border-right-color: #63b3ed; /* Jadikan kursor terlihat */
-            animation: blink-caret .75s step-end infinite;
-        }
-
-        /* Keyframes untuk animasi kedip kursor */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #63b3ed; }
+        /* Gaya untuk teks monospasi yang unik */
+        .unique-mono-text {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            white-space: nowrap; /* Pastikan tetap dalam satu baris */
+            overflow: hidden; /* Sembunyikan jika melebihi batas */
+            text-overflow: ellipsis; /* Tambahkan elipsis jika terpotong */
+            display: block; /* Agar max-width bekerja */
         }
         /* Gaya untuk area kode atau preformat */
         pre {
@@ -97,12 +82,12 @@
     <!-- Bagian Home (Hero) -->
     <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 py-16 bg-gradient-to-br from-gray-900 to-black">
         <div class="space-y-6">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
                 Halo, saya <span class="text-blue-400">Julian</span>.
             </h1>
-            <!-- Mengubah ukuran font untuk responsivitas yang lebih baik -->
-            <p class="text-xl sm:text-2xl md:text-4xl text-gray-300 font-mono typing-text">
-                &gt; Pengembang Perangkat Lunak | Pembelajar Abadi
+            <!-- Teks tanpa animasi pengetikan, dengan font monospasi unik -->
+            <p class="text-xl sm:text-2xl md:text-4xl text-gray-300 unique-mono-text">
+                &gt; Junior Coder | Writer
             </p>
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
                 Saya suka membangun hal-hal baru dan memecahkan masalah kompleks dengan kode. Mari ciptakan sesuatu yang luar biasa.
@@ -300,27 +285,6 @@
                     });
                 });
             });
-
-            // Efek pengetikan untuk teks hero
-            const typingTextElement = document.querySelector('.typing-text');
-            if (typingTextElement) {
-                const originalText = typingTextElement.textContent;
-                typingTextElement.textContent = ''; // Kosongkan teks awal
-                let i = 0;
-                const typingSpeed = 75; // Kecepatan mengetik dalam ms per karakter
-
-                function typeWriter() {
-                    if (i < originalText.length) {
-                        typingTextElement.textContent += originalText.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, typingSpeed);
-                    } else {
-                        // Setelah semua teks diketik, tambahkan kelas untuk kursor berkedip
-                        typingTextElement.classList.add('blink-active');
-                    }
-                }
-                typeWriter(); // Mulai animasi
-            }
         });
     </script>
 </body>
