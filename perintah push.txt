@@ -1,5 +1,6 @@
 PUSH GITHUB:
 
+git pull origin master
 git add .
 git commit -m "Deskripsi perubahan"
 git push origin main
