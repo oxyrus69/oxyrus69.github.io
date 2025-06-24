@@ -29,15 +29,16 @@
         a:hover {
             color: #90cdf4; /* Warna biru sedikit lebih terang saat hover */
         }
-        /* Gaya untuk kartu proyek */
-        .project-card {
+        /* Gaya untuk kartu proyek dan keahlian */
+        .project-card, .skill-item {
             background-color: #2d3748; /* Warna latar belakang kartu gelap */
             border-radius: 0.5rem;
             padding: 1.5rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer; /* Menandakan bahwa item dapat diklik */
         }
-        .project-card:hover {
+        .project-card:hover, .skill-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -60,6 +61,97 @@
         code {
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
         }
+
+        /* Gaya untuk Modal (Pop-up) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Overlay gelap */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Pastikan di atas konten lain */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #2d3748; /* Latar belakang modal */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto; /* Scroll jika konten terlalu panjang */
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .modal-close-button:hover {
+            color: #ef4444; /* Warna merah saat hover */
+        }
+        .modal-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Gaya Khusus untuk Modal Fitur Proyek */
+        .project-features-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Satu kolom untuk mobile */
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .project-features-grid {
+                grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk tablet ke atas */
+            }
+        }
+        .feature-card {
+            background-color: #1a202c; /* Latar belakang gelap */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: left;
+        }
+        .feature-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-card h4 {
+            font-weight: 600; /* semi-bold */
+            color: #63b3ed; /* Warna biru cerah */
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #cbd5e0; /* Warna teks abu-abu terang */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -78,7 +170,7 @@
             </ul>
         </nav>
     </header>
-<!-- Bagian Test -->
+
     <!-- Bagian Home (Hero) -->
     <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 py-16 bg-gradient-to-br from-gray-900 to-black">
         <div class="space-y-6">
@@ -90,7 +182,7 @@
                 &gt; Junior Coder | Writer
             </p>
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
-                Saya suka membangun hal-hal baru dan menulis cerita. Mari ciptakan sesuatu yang luar biasa.
+                Saya suka membangun hal-hal baru dan memecahkan masalah kompleks dengan kode. Mari ciptakan sesuatu yang luar biasa.
             </p>
             <a href="#projects" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
                 Lihat Proyek Saya
@@ -104,13 +196,13 @@
             <h2 class="text-4xl font-bold text-white mb-8">Tentang Saya</h2>
             <div class="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
                 <p class="mb-4">
-                    Saya adalah seorang junior coder web dengan fokus pada <span class="text-blue-400 font-semibold">pengembangan web full-stack</span>. Saya memiliki pengalaman dalam visualisasi proses bisnis, membangun aplikasi, dan efisien menggunakan berbagai teknologi.
+                    Saya adalah seorang pengembang perangkat lunak yang bersemangat dengan fokus pada <span class="text-blue-400 font-semibold">pengembangan web full-stack</span>. Saya memiliki pengalaman dalam membangun aplikasi yang kuat, skalabel, dan efisien menggunakan berbagai teknologi.
                 </p>
                 <p class="mb-4">
-                    Filosofi saya adalah <span class="text-green-400 font-semibold">kesederhanaan, efisiensi, dan keterbacaan</span>. Saya percaya bahwa kode yang baik tidak hanya berfungsi, tetapi juga mudah dipahami dan dipelihara oleh orang lain (termasuk diri saya sendiri di masa depan!). Saya selalu mencari cara untuk belajar teknologi baru dan meningkatkan keterampilan saya.
+                    Filosofi saya dalam coding adalah <span class="text-green-400 font-semibold">kesederhanaan, efisiensi, dan keterbacaan</span>. Saya percaya bahwa kode yang baik tidak hanya berfungsi, tetapi juga mudah dipahami dan dipelihara oleh orang lain (termasuk diri saya sendiri di masa depan!). Saya selalu mencari cara untuk belajar teknologi baru dan meningkatkan keterampilan saya.
                 </p>
                 <p>
-                    Ketika tidak sedang coding, saya biasanya <span class="text-yellow-400 font-semibold">membaca buku, bermain game, atau menulis cerita</span>.
+                    Ketika tidak sedang coding, saya biasanya <span class="text-yellow-400 font-semibold">membaca buku, bermain game, atau menjelajahi alam</span>.
                 </p>
             </div>
         </div>
@@ -121,36 +213,36 @@
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-12">Keahlian Saya</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                <!-- Keahlian Baru -->
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <!-- Data keahlian ditambahkan sebagai atribut data-* -->
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Copy Writing" data-skill-image="img/copy-writing.png" data-skill-description="Keahlian dalam menulis teks yang persuasif dan menarik untuk tujuan pemasaran, periklanan, atau konten web. Mampu menciptakan pesan yang jelas dan efektif untuk audiens target.">
                     <i data-lucide="file-text" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Copy Writing</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Fast-Typer" data-skill-image="img/fast-typer.png" data-skill-description="Kemampuan mengetik dengan kecepatan dan akurasi tinggi, meningkatkan efisiensi dalam entri data, penulisan kode, dan tugas berbasis teks lainnya.">
                     <i data-lucide="keyboard" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Fast-Typer</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Public Speaking" data-skill-image="img/public-speaking.png" data-skill-description="Kemampuan untuk menyampaikan informasi atau presentasi di depan umum dengan jelas, percaya diri, dan menarik, baik untuk audiens kecil maupun besar.">
                     <i data-lucide="megaphone" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Public Speaking</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Digital Apps Adaptability" data-skill-image="img/digital-apps.png" data-skill-description="Cepat beradaptasi dan mahir dalam menggunakan berbagai aplikasi digital dan perangkat lunak, termasuk alat produktivitas, platform kolaborasi, dan alat pengembangan.">
                     <i data-lucide="layout-grid" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Digital Apps Adaptability</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="PHP" data-skill-image="img/php.png" data-skill-description="Penguasaan bahasa pemrograman PHP untuk pengembangan web sisi server, termasuk pembuatan aplikasi dinamis, mengelola database.">
                     <i data-lucide="code" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">PHP</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Bootstrap" data-skill-image="img/bootstrap.png" data-skill-description="Kemampuan menggunakan framework CSS Bootstrap untuk membangun situs web yang responsif dan menarik secara visual dengan cepat dan efisien.">
                     <i data-lucide="columns" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Bootstrap</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Work Independently or Team" data-skill-image="img/work.png" data-skill-description="Mampu bekerja secara efektif baik sebagai individu yang mandiri dengan inisiatif tinggi maupun sebagai anggota tim yang kolaboratif, berkontribusi pada tujuan bersama.">
                     <i data-lucide="users" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Work Independently or Team</p>
                 </div>
-                <div class="skill-item bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Graphic Designer" data-skill-image="img/design.png" data-skill-description="Keahlian dalam menciptakan visual yang menarik dan efektif untuk berbagai media, menggunakan perangkat lunak desain grafis.">
                     <i data-lucide="palette" class="w-10 h-10 text-blue-400 mb-3"></i>
                     <p class="text-xl font-semibold text-white">Graphic Designer</p>
                 </div>
@@ -164,10 +256,26 @@
             <h2 class="text-4xl font-bold text-white mb-12">Proyek Pilihan</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Proyek 1 -->
-                <div class="project-card">
+                <div class="project-card" 
+                     data-project-name="E-Purchasing" 
+                     data-project-features='[
+                         {"title": "Login", "image": "img/login.png", "description": "Antarmuka login yang bersih, elegan."},
+                         {"title": "Dashboard", "image": "img/dashboard.png", "description": "UI/UX ciamik nan dinamis, nyaman untuk dilihat."},
+                         {"title": "Manage Supplier", "image": "img/manage-supplier.png", "description": "Pengelolaan supplier sesuai kebutuhan."},
+                         {"title": "Manage Product", "image": "img/manage-product.png", "description": "Pengelolaan produk yang rinci disertai satuan."},
+                         {"title": "Manage Stock", "image": "img/manage-stock.png", "description": "Pengelolaan stok detail dengan riwayat pergerakan stok."},
+                         {"title": "Stok Opname", "image": "img/adjust-stock.png", "description": "Stok opname yang mempermudah sinkronisasi data sistem dengan fisik."},
+                         {"title": "Purchase Request", "image": "img/manage-pr.png", "description": "Pengelolaan permintaan pembelian yang mudah untuk dikerjakan."},
+                         {"title": "Purchase Order", "image": "img/manage-po.png", "description": "Pengelolaan purchase order yang dapat disetujui maupun ditolak, menjadikan sistem yang adil."},
+                         {"title": "Penerimaan Barang (GRN)", "image": "img/manage-grn.png", "description": "Pengelolaan barang yang diterima (Goods Receipt Notes) untuk melihat detail barang yang diterima."},
+                         {"title": "Permintaan Barang Internal", "image": "img/add-requisition.png", "description": "Fungsi yang dapat membantu Gudang jika barang diminta, disertai alasan permintaan."},
+                         {"title": "Faktur (Invoice)", "image": "img/manage-invoice.png", "description": "Salah satu elemen penting untuk bukti barang yang telah diterima sepenuhnya."},
+                         {"title": "Laporan", "image": "img/report.png", "description": "Bagian krusial yang bisa membantu pemangku kepentingan dalam mengambil keputusan."},
+                         {"title": "Manage Users", "image": "img/manage-users.png", "description": "Pengelolaan pengguna serta peran sehingga alur kerja terorganisir dan meminimalisir penyalahgunaan sistem."}
+                     ]'>
                     <h3 class="text-2xl font-bold text-white mb-3">E-Purchasing</h3>
                     <p class="text-gray-300 mb-4">
-                        Sistem Informasi Purchasing. Mengelola supplier, produk, PO, PR dan GRN. Framework Laravel dengan kueri database MySQL. Cocok untuk membantu pengelolaan bidang Purchasing.
+                        Sistem informasi purchasing yang mengadaptasi proses bisnis purchasing berbasis web-responsive. Dapat mengelola supplier, product, stock, purchase-request, purchase-order, penerimaan barang, permintaan barangi internal, faktur, laporan dan pengguna. Menggunakan Laravel 11 dan PHP serta MySQL. Cocok untuk bidang Purchasing.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Laravel</span>
@@ -175,19 +283,22 @@
                         <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
                     </div>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="https://github.com/yourusername/project1" target="_blank" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
-                            <i data-lucide="github" class="w-5 h-5"></i>
-                            <span>Kode</span>
-                        </a>
-                        <a href="#" target="_blank" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                        <!-- Tombol Demo untuk memicu modal fitur proyek -->
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
                             <i data-lucide="external-link" class="w-5 h-5"></i>
-                            <span>Demo</span>
+                            <span>Fitur</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Proyek 2 -->
-                <div class="project-card">
+                <div class="project-card" 
+                     data-project-name="Nama Proyek 2" 
+                     data-project-features='[
+                         {"title": "Visualisasi Data", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+A", "description": "Menerjemahkan data kompleks menjadi grafik yang mudah dipahami."},
+                         {"title": "Interaktivitas Tinggi", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+B", "description": "Pengguna dapat berinteraksi dengan visualisasi secara real-time."},
+                         {"title": "Optimasi Performa", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+C", "description": "Menjamin pemuatan cepat dan rendering yang mulus bahkan dengan dataset besar."}
+                     ]'>
                     <h3 class="text-2xl font-bold text-white mb-3">Nama Proyek 2</h3>
                     <p class="text-gray-300 mb-4">
                         Proyek ini berfokus pada visualisasi data interaktif untuk tren pasar menggunakan D3.js.
@@ -198,11 +309,7 @@
                         <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">HTML/CSS</span>
                     </div>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="https://github.com/yourusername/project2" target="_blank" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
-                            <i data-lucide="github" class="w-5 h-5"></i>
-                            <span>Kode</span>
-                        </a>
-                        <a href="#" target="_blank" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
                             <i data-lucide="external-link" class="w-5 h-5"></i>
                             <span>Demo</span>
                         </a>
@@ -210,7 +317,13 @@
                 </div>
 
                 <!-- Proyek 3 -->
-                <div class="project-card">
+                <div class="project-card" 
+                     data-project-name="Nama Proyek 3" 
+                     data-project-features='[
+                         {"title": "Manajemen Tugas", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+X", "description": "Membuat, mengedit, dan melacak tugas harian."},
+                         {"title": "Sinkronisasi Cloud", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+Y", "description": "Data tersimpan aman dan dapat diakses dari berbagai perangkat."},
+                         {"title": "Notifikasi Real-time", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+Z", "description": "Peringatan otomatis untuk tenggat waktu tugas yang akan datang."}
+                     ]'>
                     <h3 class="text-2xl font-bold text-white mb-3">Nama Proyek 3</h3>
                     <p class="text-gray-300 mb-4">
                         Aplikasi seluler sederhana untuk manajemen tugas yang dibangun dengan React Native dan Firebase.
@@ -220,11 +333,7 @@
                         <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Firebase</span>
                     </div>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="https://github.com/yourusername/project3" target="_blank" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
-                            <i data-lucide="github" class="w-5 h-5"></i>
-                            <span>Kode</span>
-                        </a>
-                        <a href="#" target="_blank" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
                             <i data-lucide="external-link" class="w-5 h-5"></i>
                             <span>Demo</span>
                         </a>
@@ -268,6 +377,27 @@
         </div>
     </footer>
 
+    <!-- Modal untuk Keahlian -->
+    <div id="skillModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeSkillModalBtn">&times;</button>
+            <h3 id="modalSkillName" class="text-2xl font-bold text-white mb-4"></h3>
+            <img id="modalSkillImage" src="" alt="Skill Image" class="modal-image">
+            <p id="modalSkillDescription" class="text-gray-300"></p>
+        </div>
+    </div>
+
+    <!-- Modal Baru untuk Proyek -->
+    <div id="projectModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeProjectModalBtn">&times;</button>
+            <h3 id="modalProjectName" class="text-2xl font-bold text-white mb-4"></h3>
+            <div id="modalProjectFeatures" class="project-features-grid">
+                <!-- Fitur proyek akan dimuat di sini oleh JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             // Menginisialisasi ikon Lucide
@@ -284,6 +414,110 @@
                         behavior: 'smooth'
                     });
                 });
+            });
+
+            /* --- Logika Modal Keahlian --- */
+            const skillItems = document.querySelectorAll('.skill-item');
+            const skillModal = document.getElementById('skillModal');
+            const closeSkillModalBtn = document.getElementById('closeSkillModalBtn');
+            const modalSkillName = document.getElementById('modalSkillName');
+            const modalSkillImage = document.getElementById('modalSkillImage');
+            const modalSkillDescription = document.getElementById('modalSkillDescription');
+
+            skillItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const skillName = this.dataset.skillName;
+                    const skillImage = this.dataset.skillImage;
+                    const skillDescription = this.dataset.skillDescription;
+
+                    modalSkillName.textContent = skillName;
+                    modalSkillImage.src = skillImage;
+                    modalSkillImage.alt = skillName + " Image";
+                    modalSkillDescription.textContent = skillDescription;
+
+                    skillModal.classList.add('active');
+                });
+            });
+
+            closeSkillModalBtn.addEventListener('click', function() {
+                skillModal.classList.remove('active');
+            });
+
+            skillModal.addEventListener('click', function(e) {
+                if (e.target === skillModal) {
+                    skillModal.classList.remove('active');
+                }
+            });
+
+            /* --- Logika Modal Proyek --- */
+            const projectDemoBtns = document.querySelectorAll('.project-demo-btn');
+            const projectModal = document.getElementById('projectModal');
+            const closeProjectModalBtn = document.getElementById('closeProjectModalBtn');
+            const modalProjectName = document.getElementById('modalProjectName');
+            const modalProjectFeatures = document.getElementById('modalProjectFeatures');
+
+            projectDemoBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault(); // Mencegah navigasi ke '#'
+
+                    const projectCard = this.closest('.project-card'); // Dapatkan kartu proyek induk
+                    const projectName = projectCard.dataset.projectName;
+                    const projectFeaturesJson = projectCard.dataset.projectFeatures;
+                    let projectFeatures = [];
+
+                    try {
+                        projectFeatures = JSON.parse(projectFeaturesJson);
+                    } catch (error) {
+                        console.error("Error parsing project features JSON:", error);
+                        return; // Hentikan jika ada kesalahan parsing
+                    }
+
+                    modalProjectName.textContent = projectName;
+                    modalProjectFeatures.innerHTML = ''; // Bersihkan konten sebelumnya
+
+                    // Buat elemen untuk setiap fitur
+                    projectFeatures.forEach(feature => {
+                        const featureCard = document.createElement('div');
+                        featureCard.classList.add('feature-card');
+                        
+                        const featureImage = document.createElement('img');
+                        featureImage.src = feature.image;
+                        featureImage.alt = feature.title;
+                        featureImage.onerror = function() { // Fallback jika gambar gagal dimuat
+                            this.src = 'https://placehold.co/400x250/FF0000/FFFFFF?text=Gambar+Rusak';
+                        };
+
+                        const featureTitle = document.createElement('h4');
+                        featureTitle.textContent = feature.title;
+
+                        const featureDescription = document.createElement('p');
+                        featureDescription.textContent = feature.description;
+
+                        featureCard.appendChild(featureImage);
+                        featureCard.appendChild(featureTitle);
+                        featureCard.appendChild(featureDescription);
+                        modalProjectFeatures.appendChild(featureCard);
+                    });
+
+                    projectModal.classList.add('active'); // Tampilkan modal
+                });
+            });
+
+            closeProjectModalBtn.addEventListener('click', function() {
+                projectModal.classList.remove('active');
+            });
+
+            projectModal.addEventListener('click', function(e) {
+                if (e.target === projectModal) {
+                    projectModal.classList.remove('active');
+                }
+            });
+
+            // Tutup modal proyek saat tombol ESC ditekan
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+                    projectModal.classList.remove('active');
+                }
             });
         });
     </script>
