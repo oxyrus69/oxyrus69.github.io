@@ -182,7 +182,7 @@
                 &gt; Junior Coder | Writer
             </p>
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
-                Saya suka membangun hal-hal baru dan memecahkan masalah kompleks dengan menulis dan kode. Mari ciptakan sesuatu yang luar biasa.
+                Saya suka membangun hal-hal baru dan memecahkan masalah kompleks dengan kode. Mari ciptakan sesuatu yang luar biasa.
             </p>
             <a href="#projects" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
                 Lihat Proyek Saya
@@ -303,7 +303,7 @@
                          {"title": "Pengguna", "image": "img/project2/manage-user.PNG", "description": "Kelola pengguna dan peran yang terorganisir."},
                          {"title": "Departemen", "image": "img/project2/manage-departemen.PNG", "description": "Kelola Departemen dan sesuaikan anggota."},
                          {"title": "Jabatan", "image": "img/project2/manage-jabatan.PNG", "description": "Kelola jabatan dari para manager dan karyawan dengan cepat."},
-                         {"title": "Report", "image": "img/project2/report.PNG", "description": "Tren Laporan dengan visual yang lebih baik."},
+                         {"title": "Report", "image": "img/project2/report.PNG", "description": "Tren Laporan dengan visual yang lebih baik."}
                      ]'>
                     <h3 class="text-2xl font-bold text-white mb-3">SIMPEG Karyawan</h3>
                     <p class="text-gray-300 mb-4">
@@ -318,7 +318,6 @@
                         <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Alpine.js</span>
                     </div>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <!-- Tombol Demo untuk memicu modal fitur proyek -->
                         <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
                             <i data-lucide="external-link" class="w-5 h-5"></i>
                             <span>Fitur</span>
@@ -328,11 +327,9 @@
 
                 <!-- Proyek 3 -->
                 <div class="project-card" 
-                     data-project-name="Nama Proyek 3" 
+                     data-project-name="Segera Hadir" 
                      data-project-features='[
-                         {"title": "Manajemen Tugas", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+X", "description": "Membuat, mengedit, dan melacak tugas harian."},
-                         {"title": "Sinkronisasi Cloud", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+Y", "description": "Data tersimpan aman dan dapat diakses dari berbagai perangkat."},
-                         {"title": "Notifikasi Real-time", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Fitur+Z", "description": "Peringatan otomatis untuk tenggat waktu tugas yang akan datang."}
+                         {"title": "Fitur Sedang Dikembangkan", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Coming+Soon", "description": "Deskripsi fitur ini akan tersedia segera setelah proyek dipublikasikan."}
                      ]'>
                     <h3 class="text-2xl font-bold text-white mb-3">SOON</h3>
                     <p class="text-gray-300 mb-4">
@@ -362,7 +359,7 @@
                 Tertarik untuk berkolaborasi atau hanya ingin menyapa? Jangan ragu untuk menghubungi saya melalui saluran berikut:
             </p>
             <div class="flex justify-center space-x-6 text-gray-300">
-                <a href="endriojn@gmail.com" class="flex flex-col items-center hover:text-white transition duration-300">
+                <a href="mailto:endriojn@gmail.com" class="flex flex-col items-center hover:text-white transition duration-300">
                     <i data-lucide="mail" class="w-8 h-8 mb-2"></i>
                     <span class="text-sm">Email</span>
                 </a>
@@ -421,12 +418,15 @@
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
             // Smooth scrolling untuk navigasi
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            document.querySelectorAll('header nav ul li a[href^="#"]').forEach(anchor => { // Selector lebih spesifik
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') { // Pastikan ID tidak kosong atau hanya '#'
+                        document.querySelector(targetId).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
@@ -441,7 +441,7 @@
             skillItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const skillName = this.dataset.skillName;
-                    const skillImage = this.dataset.skillImage;
+                    const skillImage = this.dataset.skillImage; 
                     const skillDescription = this.dataset.skillDescription;
 
                     modalSkillName.textContent = skillName;
@@ -463,6 +463,13 @@
                 }
             });
 
+            // Tutup modal saat tombol ESC ditekan
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && skillModal.classList.contains('active')) {
+                    skillModal.classList.remove('active');
+                }
+            });
+
             /* --- Logika Modal Proyek --- */
             const projectDemoBtns = document.querySelectorAll('.project-demo-btn');
             const projectModal = document.getElementById('projectModal');
@@ -479,10 +486,16 @@
                     const projectFeaturesJson = projectCard.dataset.projectFeatures;
                     let projectFeatures = [];
 
+                    console.log("Processing project:", projectName); // Log nama proyek
+                    console.log("Raw project features JSON:", projectFeaturesJson); // Log JSON mentah
+
                     try {
                         projectFeatures = JSON.parse(projectFeaturesJson);
+                        console.log("Parsed project features:", projectFeatures); // Log objek yang sudah diparse
                     } catch (error) {
-                        console.error("Error parsing project features JSON:", error);
+                        console.error("Error parsing project features JSON for " + projectName + ":", error);
+                        // Hapus alert agar tidak mengganggu pengalaman pengguna di mode debug
+                        // alert("Terjadi kesalahan saat memuat detail fitur proyek. Silakan periksa konsol untuk detailnya.");
                         return; // Hentikan jika ada kesalahan parsing
                     }
 
@@ -495,10 +508,11 @@
                         featureCard.classList.add('feature-card');
                         
                         const featureImage = document.createElement('img');
-                        featureImage.src = feature.image;
+                        featureImage.src = feature.image; 
                         featureImage.alt = feature.title;
                         featureImage.onerror = function() { // Fallback jika gambar gagal dimuat
                             this.src = 'https://placehold.co/400x250/FF0000/FFFFFF?text=Gambar+Rusak';
+                            console.error("Gambar gagal dimuat:", this.src); // Log gambar yang gagal dimuat
                         };
 
                         const featureTitle = document.createElement('h4');
