@@ -119,13 +119,46 @@
             margin-bottom: 1rem;
         }
 
-        /* Gaya Khusus untuk Modal Fitur Proyek */
-        .project-features-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Satu kolom untuk mobile */
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+        .tab-button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            background-color: #2d3748; /* Warna abu-abu gelap */
+            color: #cbd5e0; /* Warna teks abu-abu terang */
+            border-radius: 0.375rem; /* rounded-md */
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
         }
+
+        .tab-button:hover {
+            background-color: #4a5568; /* Warna abu-abu sedikit lebih terang saat hover */
+            color: #ffffff;
+        }
+
+        .tab-button.active {
+            background-color: #4299e1; /* Warna biru untuk tab aktif */
+            color: #ffffff;
+            font-weight: 600; /* semi-bold */
+            border-color: #63b3ed;
+        }
+
+        .tab-content {
+            display: none; /* Sembunyikan semua konten tab secara default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block; /* Tampilkan hanya konten tab yang aktif */
+        }
+
+        /* Animasi fade-in sederhana */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (min-width: 640px) { /* sm breakpoint */
             .project-features-grid {
                 grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk tablet ke atas */
@@ -152,6 +185,8 @@
             font-size: 0.9rem;
             color: #cbd5e0; /* Warna teks abu-abu terang */
         }
+
+
     </style>
 </head>
 <body class="antialiased">
@@ -327,22 +362,39 @@
 
                 <!-- Proyek 3 -->
                 <div class="project-card" 
-                     data-project-name="Segera Hadir" 
+                     data-project-name="TokoKu" 
                      data-project-features='[
-                         {"title": "Fitur Sedang Dikembangkan", "image": "https://placehold.co/400x250/50B3E8/FFFFFF?text=Coming+Soon", "description": "Deskripsi fitur ini akan tersedia segera setelah proyek dipublikasikan."}
+                     {"title": "Login", "image": "img/project3/login.PNG", "description": "Antarmuka login yang bersih, elegan, stylish."},
+                     {"title": "Toko", "image": "img/project3/toko.PNG", "description": "Antarmuka toko yang profesional."},
+                     {"title": "Checkout", "image": "img/project3/checkout.PNG", "description": "Checkout yang mudah dilengkapi dengan sistem kupon."},
+                     {"title": "Dashboard Admin", "image": "img/project3/dashboard.PNG", "description": "Dashboard interaktif dan adaptif untuk desktop maupun mobile."},
+                     {"title": "Manajemen Product", "image": "img/project3/manage-produk.PNG", "description": "Kelola Produk dengan mudah."},
+                     {"title": "Manajemen Kategori", "image": "img/project3/manage-category.PNG", "description": "Kelola Kategori mempermudah pencarian produk."},
+                     {"title": "Manajemen Pesanan", "image": "img/project3/manage-pesanan.PNG", "description": "Kelola Pesanan pelanggan dengan detail."},
+                     {"title": "Manajemen Kupon", "image": "img/project3/manage-kupon.PNG", "description": "Penerapan sistem kupon untuk menghemat biaya pembelian produk."},
+                     {"title": "Display Product", "image": "img/project3/display-product.PNG", "description": "Antarmuka produk yang ditampilkan dengan jelas dan rinci disertai ulasan."},
+                     {"title": "Laporan", "image": "img/project3/report.PNG", "description": "Grafik pelaporan yang rinci membantu pengambilan keputusan perusahaan."},
+                     {"title": "Manajemen Pengguna", "image": "img/project3/manage-user.PNG", "description": "Mengelola akun pelanggan yang aktif dan administrator."},
+                     {"title": "Pesan Masuk", "image": "img/project3/contact.PNG", "description": "Admin dengan mudah menerima pesan kritik serta saran melalui Admin Panel."},
+                     {"title": "Riwayat Pesanan", "image": "img/project3/history-order.PNG", "description": "Pelanggan mudah melihat riwayat dan status pesanan produk yang dipilih."},
+                     {"title": "Faktur", "image": "img/project3/faktur.PNG", "description": "Rincian faktur setiap pembelian produk."},
                      ]'>
-                    <h3 class="text-2xl font-bold text-white mb-3">SOON</h3>
+                    <h3 class="text-2xl font-bold text-white mb-3">TokoKu</h3>
                     <p class="text-gray-300 mb-4">
-                        Segera dipublikasi
+                        Proyek marketplace-like cocok untuk membangun toko digital independen. Mampu mengelola produk, kupon, melakukan belanja dan seterusnya. Menggunakan Laravel 11, PHP 8+, Tailwind.css, MySQL XAMPP dan Alpine.js serta Chart.js.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">React Native</span>
-                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Firebase</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Laravel</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">PHP</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Chart.js</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Tailwind.css</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Alpine.js</span>
                     </div>
                     <div class="flex justify-center md:justify-start space-x-4">
                         <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
                             <i data-lucide="external-link" class="w-5 h-5"></i>
-                            <span>Demo</span>
+                            <span>Fitur</span>
                         </a>
                     </div>
                 </div>
@@ -401,12 +453,16 @@
     <!-- Modal Baru untuk Proyek -->
     <div id="projectModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close-button" id="closeProjectModalBtn">&times;</button>
+            <button class="modal-close-button" id="closeProjectModalBtn">×</button>
             <h3 id="modalProjectName" class="text-2xl font-bold text-white mb-4"></h3>
-            <div id="modalProjectFeatures" class="project-features-grid">
-                <!-- Fitur proyek akan dimuat di sini oleh JavaScript -->
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div id="modalProjectTabs" class="flex-shrink-0 md:w-1/4">
+                    </div>
+                <div id="modalProjectContent" class="flex-grow">
+                    </div>
             </div>
-        </div>
+            </div>
     </div>
 
     <script>
@@ -470,78 +526,114 @@
                 }
             });
 
-            /* --- Logika Modal Proyek --- */
+                        /* --- Logika Modal Proyek (Versi Baru dengan Tab) --- */
             const projectDemoBtns = document.querySelectorAll('.project-demo-btn');
             const projectModal = document.getElementById('projectModal');
             const closeProjectModalBtn = document.getElementById('closeProjectModalBtn');
             const modalProjectName = document.getElementById('modalProjectName');
-            const modalProjectFeatures = document.getElementById('modalProjectFeatures');
 
             projectDemoBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
-                    e.preventDefault(); // Mencegah navigasi ke '#'
+                    e.preventDefault();
 
-                    const projectCard = this.closest('.project-card'); // Dapatkan kartu proyek induk
+                    const projectCard = this.closest('.project-card');
                     const projectName = projectCard.dataset.projectName;
                     const projectFeaturesJson = projectCard.dataset.projectFeatures;
                     let projectFeatures = [];
 
-                    console.log("Processing project:", projectName); // Log nama proyek
-                    console.log("Raw project features JSON:", projectFeaturesJson); // Log JSON mentah
-
                     try {
                         projectFeatures = JSON.parse(projectFeaturesJson);
-                        console.log("Parsed project features:", projectFeatures); // Log objek yang sudah diparse
                     } catch (error) {
                         console.error("Error parsing project features JSON for " + projectName + ":", error);
-                        // Hapus alert agar tidak mengganggu pengalaman pengguna di mode debug
-                        // alert("Terjadi kesalahan saat memuat detail fitur proyek. Silakan periksa konsol untuk detailnya.");
-                        return; // Hentikan jika ada kesalahan parsing
+                        return;
                     }
 
                     modalProjectName.textContent = projectName;
-                    modalProjectFeatures.innerHTML = ''; // Bersihkan konten sebelumnya
+                    
+                    // Bersihkan konten modal sebelumnya dan siapkan struktur baru
+                    const modalContentArea = document.querySelector('#projectModal .modal-content');
+                    // Hapus elemen lama jika ada
+                    const oldContainer = modalContentArea.querySelector('.flex.flex-col.md\\:flex-row');
+                    if (oldContainer) {
+                        oldContainer.remove();
+                    }
 
-                    // Buat elemen untuk setiap fitur
-                    projectFeatures.forEach(feature => {
-                        const featureCard = document.createElement('div');
-                        featureCard.classList.add('feature-card');
+                    // Buat container utama untuk tab dan konten
+                    const mainContainer = document.createElement('div');
+                    mainContainer.className = 'flex flex-col md:flex-row gap-6 mt-4'; // mt-4 untuk spasi dari judul
+
+                    // Buat container untuk tombol tab (kolom kiri)
+                    const tabsContainer = document.createElement('div');
+                    tabsContainer.id = 'modalProjectTabs';
+                    tabsContainer.className = 'flex-shrink-0 md:w-1/4 overflow-y-auto md:max-h-[60vh]';
+
+                    // Buat container untuk konten tab (kolom kanan)
+                    const contentContainer = document.createElement('div');
+                    contentContainer.id = 'modalProjectContent';
+                    contentContainer.className = 'flex-grow';
+
+                    // Isi container dengan fitur-fitur dari data
+                    projectFeatures.forEach((feature, index) => {
+                        // 1. Buat Tombol Tab
+                        const tabButton = document.createElement('button');
+                        tabButton.className = 'tab-button';
+                        tabButton.textContent = feature.title;
+                        tabButton.dataset.target = `feature-${index}`; // Buat target unik untuk setiap konten
+                        tabsContainer.appendChild(tabButton);
+
+                        // 2. Buat Konten Tab
+                        const tabContent = document.createElement('div');
+                        tabContent.className = 'tab-content';
+                        tabContent.id = `feature-${index}`; // ID yang cocok dengan data-target
                         
-                        const featureImage = document.createElement('img');
-                        featureImage.src = feature.image; 
-                        featureImage.alt = feature.title;
-                        featureImage.onerror = function() { // Fallback jika gambar gagal dimuat
-                            this.src = 'https://placehold.co/400x250/FF0000/FFFFFF?text=Gambar+Rusak';
-                            console.error("Gambar gagal dimuat:", this.src); // Log gambar yang gagal dimuat
-                        };
+                        // Isi konten dengan gambar, judul, dan deskripsi
+                        tabContent.innerHTML = `
+                            <img src="${feature.image}" alt="${feature.title}" class="modal-image" onerror="this.src='https://placehold.co/400x250/FF0000/FFFFFF?text=Gambar+Rusak';">
+                            <h4 class="text-xl font-semibold text-blue-400 mb-2">${feature.title}</h4>
+                            <p class="text-gray-300">${feature.description}</p>
+                        `;
+                        contentContainer.appendChild(tabContent);
 
-                        const featureTitle = document.createElement('h4');
-                        featureTitle.textContent = feature.title;
-
-                        const featureDescription = document.createElement('p');
-                        featureDescription.textContent = feature.description;
-
-                        featureCard.appendChild(featureImage);
-                        featureCard.appendChild(featureTitle);
-                        featureCard.appendChild(featureDescription);
-                        modalProjectFeatures.appendChild(featureCard);
+                        // Atur tab pertama sebagai aktif secara default
+                        if (index === 0) {
+                            tabButton.classList.add('active');
+                            tabContent.classList.add('active');
+                        }
                     });
+
+                    // Tambahkan fungsi klik untuk setiap tombol tab
+                    tabsContainer.querySelectorAll('.tab-button').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // Hapus kelas 'active' dari semua tombol dan konten
+                            tabsContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                            contentContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+                            // Tambahkan kelas 'active' ke tombol yang diklik dan konten targetnya
+                            this.classList.add('active');
+                            const targetId = this.dataset.target;
+                            document.getElementById(targetId).classList.add('active');
+                        });
+                    });
+                    
+                    // Gabungkan semuanya ke dalam modal
+                    mainContainer.appendChild(tabsContainer);
+                    mainContainer.appendChild(contentContainer);
+                    // Tambahkan setelah judul modal
+                    modalProjectName.after(mainContainer);
 
                     projectModal.classList.add('active'); // Tampilkan modal
                 });
             });
 
+            // Kode untuk menutup modal (tidak perlu diubah)
             closeProjectModalBtn.addEventListener('click', function() {
                 projectModal.classList.remove('active');
             });
-
             projectModal.addEventListener('click', function(e) {
                 if (e.target === projectModal) {
                     projectModal.classList.remove('active');
                 }
             });
-
-            // Tutup modal proyek saat tombol ESC ditekan
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && projectModal.classList.contains('active')) {
                     projectModal.classList.remove('active');
