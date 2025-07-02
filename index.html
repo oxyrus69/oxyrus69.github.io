@@ -8,186 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Memuat ikon Lucide React (untuk desain website) -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        /* Mengatur font Inter sebagai default dan beberapa gaya dasar */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Warna latar belakang gelap */
-            color: #e2e8f0; /* Warna teks terang */
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-        /* Mengatur warna sorotan dan efek hover untuk tautan */
-        a {
-            color: #63b3ed; /* Warna biru cerah */
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: #90cdf4; /* Warna biru sedikit lebih terang saat hover */
-        }
-        /* Gaya untuk kartu proyek dan keahlian */
-        .project-card, .skill-item {
-            background-color: #2d3748; /* Warna latar belakang kartu gelap */
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            cursor: pointer; /* Menandakan bahwa item dapat diklik */
-        }
-        .project-card:hover, .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        /* Gaya untuk teks monospasi yang unik */
-        .unique-mono-text {
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-            white-space: nowrap; /* Pastikan tetap dalam satu baris */
-            overflow: hidden; /* Sembunyikan jika melebihi batas */
-            text-overflow: ellipsis; /* Tambahkan elipsis jika terpotong */
-            display: block; /* Agar max-width bekerja */
-        }
-        /* Gaya untuk area kode atau preformat */
-        pre {
-            background-color: #2a333f; /* Warna latar belakang blok kode */
-            color: #d1d9e6; /* Warna teks kode */
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto; /* Untuk kode yang panjang */
-        }
-        code {
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-        }
-
-        /* Gaya untuk Modal (Pop-up) */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Overlay gelap */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Pastikan di atas konten lain */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background-color: #2d3748; /* Latar belakang modal */
-            padding: 2rem;
-            border-radius: 0.75rem;
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto; /* Scroll jika konten terlalu panjang */
-            position: relative;
-            transform: translateY(-20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .modal-close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #e2e8f0;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .modal-close-button:hover {
-            color: #ef4444; /* Warna merah saat hover */
-        }
-        .modal-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tab-button {
-            display: block;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
-            background-color: #2d3748; /* Warna abu-abu gelap */
-            color: #cbd5e0; /* Warna teks abu-abu terang */
-            border-radius: 0.375rem; /* rounded-md */
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .tab-button:hover {
-            background-color: #4a5568; /* Warna abu-abu sedikit lebih terang saat hover */
-            color: #ffffff;
-        }
-
-        .tab-button.active {
-            background-color: #4299e1; /* Warna biru untuk tab aktif */
-            color: #ffffff;
-            font-weight: 600; /* semi-bold */
-            border-color: #63b3ed;
-        }
-
-        .tab-content {
-            display: none; /* Sembunyikan semua konten tab secara default */
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block; /* Tampilkan hanya konten tab yang aktif */
-        }
-
-        /* Animasi fade-in sederhana */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (min-width: 640px) { /* sm breakpoint */
-            .project-features-grid {
-                grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk tablet ke atas */
-            }
-        }
-        .feature-card {
-            background-color: #1a202c; /* Latar belakang gelap */
-            padding: 1rem;
-            border-radius: 0.5rem;
-            text-align: left;
-        }
-        .feature-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.25rem;
-            margin-bottom: 0.75rem;
-        }
-        .feature-card h4 {
-            font-weight: 600; /* semi-bold */
-            color: #63b3ed; /* Warna biru cerah */
-            margin-bottom: 0.5rem;
-        }
-        .feature-card p {
-            font-size: 0.9rem;
-            color: #cbd5e0; /* Warna teks abu-abu terang */
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="antialiased">
     <!-- Header dan Navigasi -->
@@ -237,7 +58,7 @@
                     Filosofi saya dalam coding adalah <span class="text-green-400 font-semibold">kesederhanaan, efisiensi, dan keterbacaan</span>. Saya percaya bahwa kode yang baik tidak hanya berfungsi, tetapi juga mudah dipahami dan dipelihara oleh orang lain (termasuk diri saya sendiri di masa depan!). Saya selalu mencari cara untuk belajar teknologi baru dan meningkatkan keterampilan saya.
                 </p>
                 <p>
-                    Ketika tidak sedang coding, saya biasanya <span class="text-yellow-400 font-semibold">membaca buku, bermain game, atau menulis cerita sederhana.</span>.
+                    Ketika tidak sedang coding, saya biasanya <span class="text-yellow-400 font-semibold">membaca buku, bermain game, atau menulis cerita sederhana.</span>
                 </p>
             </div>
         </div>
@@ -245,41 +66,52 @@
 
     <!-- Bagian Keahlian -->
     <section id="skills" class="py-20 px-4 bg-gray-900">
-        <div class="container text-center">
-            <h2 class="text-4xl font-bold text-white mb-12">Keahlian Saya</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                <!-- Data keahlian ditambahkan sebagai atribut data-* -->
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Copy Writing" data-skill-image="img/skills/copy-writing.png" data-skill-description="Keahlian dalam menulis teks yang persuasif dan menarik untuk tujuan pemasaran, periklanan, atau konten web. Mampu menciptakan pesan yang jelas dan efektif untuk audiens target.">
-                    <i data-lucide="file-text" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Copy Writing</p>
+        <div class="container">
+            <h2 class="text-4xl font-bold text-white mb-12 text-center">Keahlian Saya</h2>
+            
+            <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
+                
+                <div class="w-full md:w-1/2 lg:w-2/5">
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400 mb-4">Bahasa & Database</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="skill-item-v2" data-skill-name="PHP" data-skill-image="img/skills/php.png" data-skill-description="Penguasaan bahasa pemrograman PHP untuk pengembangan web sisi server, termasuk pembuatan aplikasi dinamis, mengelola database.">PHP</button>
+                                <button class="skill-item-v2" data-skill-name="MySQL" data-skill-image="img/skills/logo-mysql.png" data-skill-description="Mahir dalam merancang, mengelola, dan melakukan query pada database relasional MySQL untuk menyimpan dan mengambil data aplikasi secara efisien.">MySQL</button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400 mb-4">Framework & Tools</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="skill-item-v2" data-skill-name="Laravel" data-skill-image="img/skills/Laravel-logo.png" data-skill-description="Pengalaman membangun aplikasi web yang kompleks dan skalabel menggunakan framework Laravel, termasuk Eloquent, Blade, dan Artisan.">Laravel</button>
+                                <button class="skill-item-v2" data-skill-name="CodeIgniter 4" data-skill-image="img/skills/code-igniter4.png" data-skill-description="Keahlian dalam membangun aplikasi web yang cepat dan ringan menggunakan framework CodeIgniter 4 dengan pola desain MVC.">CodeIgniter 4</button>
+                                <button class="skill-item-v2" data-skill-name="Bootstrap" data-skill-image="img/skills/bootstrap.png" data-skill-description="Kemampuan menggunakan framework CSS Bootstrap untuk membangun situs web yang responsif dan menarik secara visual dengan cepat dan efisien.">Bootstrap</button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400 mb-4">Keahlian Profesional</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="skill-item-v2" data-skill-name="Copy Writing" data-skill-image="img/skills/copy-writing.png" data-skill-description="Keahlian dalam menulis teks yang persuasif dan menarik untuk tujuan pemasaran, periklanan, atau konten web.">Copy Writing</button>
+                                <button class="skill-item-v2" data-skill-name="Public Speaking" data-skill-image="img/skills/public-speaking.png" data-skill-description="Kemampuan untuk menyampaikan informasi atau presentasi di depan umum dengan jelas, percaya diri, dan menarik.">Public Speaking</button>
+                                <button class="skill-item-v2" data-skill-name="Kerja Tim & Mandiri" data-skill-image="img/skills/work.png" data-skill-description="Mampu bekerja secara efektif baik sebagai individu yang mandiri maupun sebagai anggota tim yang kolaboratif.">Kerja Tim & Mandiri</button>
+                                <button class="skill-item-v2" data-skill-name="Graphic Designer" data-skill-image="img/skills/design.png" data-skill-description="Keahlian dalam menciptakan visual yang menarik dan efektif untuk berbagai media, menggunakan perangkat lunak desain grafis.">Graphic Designer</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Fast-Typer" data-skill-image="img/skills/fast-typer.PNG" data-skill-description="Kemampuan mengetik dengan kecepatan dan akurasi tinggi, meningkatkan efisiensi dalam entri data, penulisan kode, dan tugas berbasis teks lainnya.">
-                    <i data-lucide="keyboard" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Fast-Typer</p>
-                </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Public Speaking" data-skill-image="img/skills/public-speaking.png" data-skill-description="Kemampuan untuk menyampaikan informasi atau presentasi di depan umum dengan jelas, percaya diri, dan menarik, baik untuk audiens kecil maupun besar.">
-                    <i data-lucide="megaphone" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Public Speaking</p>
-                </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Digital Apps Adaptability" data-skill-image="img/skills/digital-apps.png" data-skill-description="Cepat beradaptasi dan mahir dalam menggunakan berbagai aplikasi digital dan perangkat lunak, termasuk alat produktivitas, platform kolaborasi, dan alat pengembangan.">
-                    <i data-lucide="layout-grid" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Digital Apps Adaptability</p>
-                </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="PHP" data-skill-image="img/skills/php.png" data-skill-description="Penguasaan bahasa pemrograman PHP untuk pengembangan web sisi server, termasuk pembuatan aplikasi dinamis, mengelola database.">
-                    <i data-lucide="code" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">PHP</p>
-                </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Bootstrap" data-skill-image="img/skills/bootstrap.png" data-skill-description="Kemampuan menggunakan framework CSS Bootstrap untuk membangun situs web yang responsif dan menarik secara visual dengan cepat dan efisien.">
-                    <i data-lucide="columns" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Bootstrap</p>
-                </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Work Independently or Team" data-skill-image="img/skills/work.png" data-skill-description="Mampu bekerja secara efektif baik sebagai individu yang mandiri dengan inisiatif tinggi maupun sebagai anggota tim yang kolaboratif, berkontribusi pada tujuan bersama.">
-                    <i data-lucide="users" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Work Independently or Team</p>
-                </div>
-                <div class="skill-item flex flex-col items-center justify-center" data-skill-name="Graphic Designer" data-skill-image="img/skills/design.png" data-skill-description="Keahlian dalam menciptakan visual yang menarik dan efektif untuk berbagai media, menggunakan perangkat lunak desain grafis.">
-                    <i data-lucide="palette" class="w-10 h-10 text-blue-400 mb-3"></i>
-                    <p class="text-xl font-semibold text-white">Graphic Designer</p>
+    
+                <div class="w-full md:w-1/2 lg:w-3/5">
+                    <div id="skill-detail-panel" class="bg-gray-800 p-8 rounded-lg sticky top-8">
+                        <div id="skill-placeholder" class="text-center text-gray-500">
+                            <i data-lucide="mouse-pointer-click" class="w-16 h-16 mx-auto mb-4"></i>
+                            <p class="text-lg">Pilih salah satu keahlian di samping untuk melihat detailnya.</p>
+                        </div>
+                        <div id="skill-detail-content" class="hidden space-y-4">
+                            <img id="skill-detail-image" src="" alt="Skill Image" class="w-20 h-20 object-contain p-2 bg-white/10 rounded-full mx-auto">
+                            <h3 id="skill-detail-name" class="text-3xl font-bold text-center text-white"></h3>
+                            <p id="skill-detail-description" class="text-lg text-gray-300 leading-relaxed"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -515,37 +347,37 @@
                 });
             });
 
-            /* --- Logika Modal Keahlian --- */
-            const skillItems = document.querySelectorAll('.skill-item');
-            const skillModal = document.getElementById('skillModal');
-            const closeSkillModalBtn = document.getElementById('closeSkillModalBtn');
-            const modalSkillName = document.getElementById('modalSkillName');
-            const modalSkillImage = document.getElementById('modalSkillImage');
-            const modalSkillDescription = document.getElementById('modalSkillDescription');
+            /* --- Logika untuk Panel Detail Keahlian --- */
+            const skillButtons = document.querySelectorAll('.skill-item-v2');
+            const skillPlaceholder = document.getElementById('skill-placeholder');
+            const skillDetailContent = document.getElementById('skill-detail-content');
+            
+            const detailImage = document.getElementById('skill-detail-image');
+            const detailName = document.getElementById('skill-detail-name');
+            const detailDescription = document.getElementById('skill-detail-description');
 
-            skillItems.forEach(item => {
-                item.addEventListener('click', function() {
+            skillButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Hapus kelas 'active' dari semua tombol
+                    skillButtons.forEach(btn => btn.classList.remove('active'));
+                    // Tambahkan kelas 'active' ke tombol yang diklik
+                    this.classList.add('active');
+
+                    // Ambil data dari atribut data-*
                     const skillName = this.dataset.skillName;
-                    const skillImage = this.dataset.skillImage; 
+                    const skillImage = this.dataset.skillImage;
                     const skillDescription = this.dataset.skillDescription;
 
-                    modalSkillName.textContent = skillName;
-                    modalSkillImage.src = skillImage;
-                    modalSkillImage.alt = skillName + " Image";
-                    modalSkillDescription.textContent = skillDescription;
-
-                    skillModal.classList.add('active');
+                    // Isi panel detail dengan data
+                    detailName.textContent = skillName;
+                    detailImage.src = skillImage;
+                    detailImage.alt = skillName + " Image";
+                    detailDescription.textContent = skillDescription;
+                    
+                    // Tampilkan panel detail dan sembunyikan placeholder
+                    skillPlaceholder.classList.add('hidden');
+                    skillDetailContent.classList.remove('hidden');
                 });
-            });
-
-            closeSkillModalBtn.addEventListener('click', function() {
-                skillModal.classList.remove('active');
-            });
-
-            skillModal.addEventListener('click', function(e) {
-                if (e.target === skillModal) {
-                    skillModal.classList.remove('active');
-                }
             });
 
             // Tutup modal saat tombol ESC ditekan

@@ -1,0 +1,359 @@
+<style>
+        /* Mengatur font Inter sebagai default dan beberapa gaya dasar */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Warna latar belakang gelap */
+            color: #e2e8f0; /* Warna teks terang */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        /* Mengatur warna sorotan dan efek hover untuk tautan */
+        a {
+            color: #63b3ed; /* Warna biru cerah */
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #90cdf4; /* Warna biru sedikit lebih terang saat hover */
+        }
+        /* Gaya untuk kartu proyek dan keahlian */
+        .project-card, .skill-item {
+            background-color: #2d3748; /* Warna latar belakang kartu gelap */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer; /* Menandakan bahwa item dapat diklik */
+        }
+        .project-card:hover, .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Gaya untuk teks monospasi yang unik */
+        .unique-mono-text {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            white-space: nowrap; /* Pastikan tetap dalam satu baris */
+            overflow: hidden; /* Sembunyikan jika melebihi batas */
+            text-overflow: ellipsis; /* Tambahkan elipsis jika terpotong */
+            display: block; /* Agar max-width bekerja */
+        }
+        /* Gaya untuk area kode atau preformat */
+        pre {
+            background-color: #2a333f; /* Warna latar belakang blok kode */
+            color: #d1d9e6; /* Warna teks kode */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto; /* Untuk kode yang panjang */
+        }
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+        }
+
+        /* Gaya untuk Modal (Pop-up) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Overlay gelap */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Pastikan di atas konten lain */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #2d3748; /* Latar belakang modal */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto; /* Scroll jika konten terlalu panjang */
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .modal-close-button:hover {
+            color: #ef4444; /* Warna merah saat hover */
+        }
+        .modal-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            background-color: #2d3748; /* Warna abu-abu gelap */
+            color: #cbd5e0; /* Warna teks abu-abu terang */
+            border-radius: 0.375rem; /* rounded-md */
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            background-color: #4a5568; /* Warna abu-abu sedikit lebih terang saat hover */
+            color: #ffffff;
+        }
+
+        .tab-button.active {
+            background-color: #4299e1; /* Warna biru untuk tab aktif */
+            color: #ffffff;
+            font-weight: 600; /* semi-bold */
+            border-color: #63b3ed;
+        }
+
+        .tab-content {
+            display: none; /* Sembunyikan semua konten tab secara default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block; /* Tampilkan hanya konten tab yang aktif */
+        }
+
+        /* Animasi fade-in sederhana */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .project-features-grid {
+                grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk tablet ke atas */
+            }
+        }
+        .feature-card {
+            background-color: #1a202c; /* Latar belakang gelap */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: left;
+        }
+        .feature-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-card h4 {
+            font-weight: 600; /* semi-bold */
+            color: #63b3ed; /* Warna biru cerah */
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #cbd5e0; /* Warna teks abu-abu terang */
+        }
+        .skill-item-v2 {
+            background-color: #2d3748;
+            color: #cbd5e0;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* rounded-full */
+            border: 1px solid #4a5568;
+            font-weight: 500; /* medium */
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .skill-item-v2:hover {
+            background-color: #4a5568;
+            color: #ffffff;
+            border-color: #63b3ed;
+        }
+        .skill-item-v2.active {
+            background-color: #4299e1;
+            color: #ffffff;
+            border-color: #63b3ed;
+            font-weight: 600;
+        }
+        /* --- Gaya untuk Layar Mobile (Lebar Maksimum 768px) --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem; /* Kurangi padding container */
+    }
+
+    /* Header dan Navigasi */
+    header nav {
+        flex-direction: column; /* Susun item navigasi ke bawah */
+        align-items: flex-start; /* Ratakan item ke kiri */
+    }
+
+    header nav ul {
+        flex-direction: column; /* Susun link navigasi ke bawah */
+        width: 100%; /* Lebar penuh */
+        margin-top: 1rem; /* Tambahkan margin atas */
+    }
+
+    header nav ul li {
+        margin-right: 0; /* Hilangkan margin kanan antar item */
+        margin-bottom: 0.5rem; /* Tambahkan margin bawah */
+    }
+
+    header nav ul li a {
+        display: block; /* Membuat tautan selebar parent */
+        padding: 0.75rem 1rem; /* Padding lebih besar untuk sentuhan */
+        border-bottom: 1px solid #4a5568; /* Tambahkan pemisah antar link */
+    }
+
+    header nav ul li:last-child a {
+        border-bottom: none; /* Hilangkan border bawah pada link terakhir */
+    }
+
+    /* Bagian Home */
+    #home {
+        padding: 5rem 1rem; /* Kurangi padding vertikal */
+    }
+
+    #home .space-y-6 > h1 {
+        font-size: 3.5rem; /* Ukuran font lebih kecil */
+    }
+
+    #home .space-y-6 > p.text-xl {
+        font-size: 1.5rem; /* Ukuran font lebih kecil */
+    }
+
+    #home .space-y-6 > a {
+        padding: 0.75rem 2rem; /* Padding tombol lebih kecil */
+        font-size: 1rem; /* Ukuran font tombol lebih kecil */
+    }
+
+    /* Bagian Tentang Saya */
+    #about {
+        padding: 5rem 1rem; /* Kurangi padding vertikal */
+    }
+
+    #about .max-w-3xl {
+        font-size: 1rem; /* Ukuran font lebih kecil */
+    }
+
+    /* Bagian Keahlian */
+    #skills {
+        padding: 5rem 1rem; /* Kurangi padding vertikal */
+    }
+
+    #skills .flex-col {
+        flex-direction: column; /* Pastikan menjadi satu kolom */
+    }
+
+    #skills .md\:w-1\/2,
+    #skills .lg\:w-2\/5,
+    #skills .md\:w-1\/2,
+    #skills .lg\:w-3\/5 {
+        width: 100%; /* Kedua kolom mengambil lebar penuh */
+    }
+
+    #skills .flex-wrap.gap-3 {
+        justify-content: center; /* Tengahkan tombol keahlian */
+    }
+
+    #skill-detail-panel {
+        position: static; /* Tidak sticky pada mobile */
+        margin-top: 2rem; /* Beri jarak dari daftar keahlian */
+    }
+
+    #skill-placeholder p {
+        font-size: 1rem;
+    }
+
+    #skill-detail-content > h3 {
+        font-size: 2rem;
+    }
+
+    #skill-detail-content > p {
+        font-size: 1rem;
+    }
+
+    /* Bagian Proyek */
+    #projects {
+        padding: 5rem 1rem; /* Kurangi padding vertikal */
+    }
+
+    #projects .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)); /* Satu kolom */
+    }
+
+    .project-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .project-card p {
+        font-size: 0.9rem;
+    }
+
+    .project-card .flex-wrap.gap-2 > span {
+        font-size: 0.75rem;
+    }
+
+    /* Bagian Kontak */
+    #contact {
+        padding: 5rem 1rem; /* Kurangi padding vertikal */
+    }
+
+    #contact .flex.justify-center.space-x-6 {
+        flex-direction: row; /* Tetap satu baris, bisa diubah jadi kolom jika perlu */
+        justify-content: space-around; /* Distribusikan ikon */
+    }
+
+    #contact .flex.flex-col.items-center {
+        margin-bottom: 1rem; /* Tambahkan margin bawah antar ikon */
+    }
+
+    /* Footer */
+    footer {
+        padding: 1.5rem 1rem; /* Kurangi padding vertikal */
+    }
+
+    footer p {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- Gaya untuk Layar Tablet (Lebar Minimum 769px dan Maksimum 1024px) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Anda bisa menambahkan gaya spesifik untuk tablet di sini jika diperlukan */
+    #skills .flex-col {
+        flex-direction: row; /* Kembali ke dua kolom untuk tablet */
+        align-items: flex-start;
+    }
+    #skills .md\:w-1\/2,
+    #skills .lg\:w-2\/5 {
+        width: 45%; /* Beri sedikit ruang antar kolom */
+    }
+    #skills .md\:w-1\/2,
+    #skills .lg\:w-3\/5 {
+        width: 55%;
+    }
+}
+
+
+    </style>
