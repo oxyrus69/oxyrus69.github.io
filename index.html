@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio Julian</title>
-    <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Memuat ikon Lucide React (untuk desain website) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="antialiased">
-    <!-- Header dan Navigasi -->
     <header class="bg-gray-900 py-4 shadow-lg">
         <nav class="container flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white hover:text-gray-200 rounded-lg p-2 transition duration-300">
-                &lt;Julian /&gt;
+                <Julian />
             </a>
             <ul class="flex space-x-6">
                 <li><a href="#home" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Home</a></li>
@@ -27,15 +24,13 @@
         </nav>
     </header>
 
-    <!-- Bagian Home (Hero) -->
     <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 py-16 bg-gradient-to-br from-gray-900 to-black">
         <div class="space-y-6">
             <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
                 Halo, saya <span class="text-blue-400">Julian</span>.
             </h1>
-            <!-- Teks tanpa animasi pengetikan, dengan font monospasi unik -->
             <p class="text-xl sm:text-2xl md:text-4xl text-gray-300 unique-mono-text">
-                &gt; Junior Coder | Writer
+                > Junior Coder | Writer
             </p>
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
                 Saya suka membangun hal-hal baru dan memecahkan masalah kompleks dengan kode. Mari ciptakan sesuatu yang luar biasa.
@@ -46,7 +41,6 @@
         </div>
     </section>
 
-    <!-- Bagian Tentang Saya -->
     <section id="about" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-8">Tentang Saya</h2>
@@ -64,7 +58,6 @@
         </div>
     </section>
 
-    <!-- Bagian Keahlian -->
     <section id="skills" class="py-20 px-4 bg-gray-900">
         <div class="container">
             <h2 class="text-4xl font-bold text-white mb-12 text-center">Keahlian Saya</h2>
@@ -144,12 +137,10 @@
         </div>
     </section>
 
-    <!-- Bagian Proyek -->
     <section id="projects" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-12">Proyek Pilihan</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Proyek 1 -->
                 <div class="project-card" 
                      data-project-name="E-Purchasing" 
                      data-project-features='[
@@ -178,7 +169,6 @@
                         <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
                     </div>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <!-- Tombol Demo untuk memicu modal fitur proyek -->
                         <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
                             <i data-lucide="external-link" class="w-5 h-5"></i>
                             <span>Fitur</span>
@@ -186,7 +176,6 @@
                     </div>
                 </div>
 
-                <!-- Proyek 2 -->
                 <div class="project-card" 
                      data-project-name="SIMPEG-Karyawan" 
                      data-project-features='[
@@ -219,7 +208,6 @@
                     </div>
                 </div>
 
-                <!-- Proyek 3 -->
                 <div class="project-card" 
                      data-project-name="TokoKu" 
                      data-project-features='[
@@ -257,67 +245,99 @@
                         </a>
                     </div>
                 </div>
-                <!-- Tambahkan lebih banyak proyek sesuai kebutuhan -->
+                
                 <div class="project-card" 
-                   data-project-name="Manajemen Inventori" 
-                   data-project-features='[
-                        {"title": "Login & Hak Akses", "image": "img/project4/login.PNG", "description": "Halaman login yang aman dengan sistem hak akses untuk membedakan Admin dan Staff."},
-                        {"title": "Dashboard Interaktif", "image": "img/project4/dashboard.PNG", "description": "Menampilkan ringkasan data penting seperti total barang, total stok, dan nilai inventori dalam bentuk kartu statistik dan grafik pie interaktif."},
-                        {"title": "Manajemen Barang (CRUD)", "image": "img/project4/item-list.PNG", "description": "Fungsionalitas lengkap untuk menambah, melihat, mengedit, dan menghapus data barang. Dilengkapi dengan pencarian, pagination, dan upload gambar (via file lokal atau URL)."},
-                        {"title": "Manajemen Kategori", "image": "img/project4/category-management.PNG", "description": "Sistem CRUD terpisah untuk mengelola kategori barang, membantu pengorganisasian data."},
-                        {"title": "Manajemen Pengguna", "image": "img/project4/user-management.PNG", "description": "Admin dapat menambah, mengedit, dan menghapus akun pengguna lain di dalam sistem."},
-                        {"title": "Ekspor Data", "image": "img/project4/report-pdf.PNG", "description": "Kemampuan untuk mengekspor daftar data barang ke format file CSV dan PDF untuk kebutuhan pelaporan."},
-                        {"title": "UI Profesional", "image": "img/project4/dashboard.PNG", "description": "Antarmuka yang bersih, modern, dan responsif dengan sidebar yang dapat di-minimize, dibangun menggunakan Tailwind CSS."}
-                   ]'>
-                  <h3 class="text-2xl font-bold text-white mb-3">Manajemen Inventori</h3>
-                  <p class="text-gray-300 mb-4">
-                      Aplikasi CRUD lengkap untuk manajemen inventori berbasis web. Dibangun menggunakan CodeIgniter 4 dengan fitur hak akses, ekspor data, dan dashboard dinamis.
-                  </p>
-                  <div class="flex flex-wrap gap-2 mb-4">
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">CodeIgniter 4</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">PHP</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Tailwind CSS</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Chart.js</span>
-                  </div>
-                  <div class="flex justify-center md:justify-start space-x-4">
-                      <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
-                          <i data-lucide="external-link" class="w-5 h-5"></i>
-                          <span>Fitur</span>
-                      </a>
-                  </div>
-              </div>
-              <div class="project-card" 
-                   data-project-name="Sistem Pendukung Keputusan (Java DSS)" 
-                   data-project-features='[
-                        {"title": "Halaman Login", "image": "img/project5/1-halaman-login.PNG", "description": "Antarmuka login yang aman, bersih, dan modern menggunakan tema FlatLaf dengan efek placeholder pada input."},
-                        {"title": "Dashboard Utama", "image": "img/project5/2-dashboard-utama.PNG", "description": "Dashboard informatif untuk menampilkan, mengelola, dan memproses data alternatif dengan layout yang terstruktur."},
-                        {"title": "Proses Kalkulasi SAW", "image": "img/project5/3-proses-saw.PNG", "description": "Implementasi metode Simple Additive Weighting (SAW) untuk menghasilkan rekomendasi berdasarkan bobot yang dinamis."},
-                        {"title": "Manajemen Data (CRUD)", "image": "img/project5/4-form-manajemen-data.PNG", "description": "Fungsionalitas lengkap untuk Tambah, Ubah, dan Hapus data langsung dari antarmuka aplikasi ke database MySQL."},
-                        {"title": "Tema Mode Gelap", "image": "img/project5/5-tampilan-dark-mode.PNG", "description": "Aplikasi mendukung tema terang dan gelap untuk kenyamanan pengguna, menunjukkan fleksibilitas UI."}
-                   ]'>
-                  <h3 class="text-2xl font-bold text-white mb-3">Sistem Pendukung Keputusan</h3>
-                  <p class="text-gray-300 mb-4">
-                      Aplikasi desktop yang dibangun dengan Java Swing untuk membantu pengambilan keputusan menggunakan metode SAW. Dilengkapi manajemen data CRUD penuh dan antarmuka modern.
-                  </p>
-                  <div class="flex flex-wrap gap-2 mb-4">
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Java</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Java Swing</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
-                      <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">FlatLaf</span>
-                  </div>
-                  <div class="flex justify-center md:justify-start space-x-4">
-                      <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
-                          <i data-lucide="external-link" class="w-5 h-5"></i>
-                          <span>Fitur</span>
-                      </a>
-                      </div>
-              </div>
+                     data-project-name="Manajemen Inventori" 
+                     data-project-features='[
+                         {"title": "Login & Hak Akses", "image": "img/project4/login.PNG", "description": "Halaman login yang aman dengan sistem hak akses untuk membedakan Admin dan Staff."},
+                         {"title": "Dashboard Interaktif", "image": "img/project4/dashboard.PNG", "description": "Menampilkan ringkasan data penting seperti total barang, total stok, dan nilai inventori dalam bentuk kartu statistik dan grafik pie interaktif."},
+                         {"title": "Manajemen Barang (CRUD)", "image": "img/project4/item-list.PNG", "description": "Fungsionalitas lengkap untuk menambah, melihat, mengedit, dan menghapus data barang. Dilengkapi dengan pencarian, pagination, dan upload gambar (via file lokal atau URL)."},
+                         {"title": "Manajemen Kategori", "image": "img/project4/category-management.PNG", "description": "Sistem CRUD terpisah untuk mengelola kategori barang, membantu pengorganisasian data."},
+                         {"title": "Manajemen Pengguna", "image": "img/project4/user-management.PNG", "description": "Admin dapat menambah, mengedit, dan menghapus akun pengguna lain di dalam sistem."},
+                         {"title": "Ekspor Data", "image": "img/project4/report-pdf.PNG", "description": "Kemampuan untuk mengekspor daftar data barang ke format file CSV dan PDF untuk kebutuhan pelaporan."},
+                         {"title": "UI Profesional", "image": "img/project4/dashboard.PNG", "description": "Antarmuka yang bersih, modern, dan responsif dengan sidebar yang dapat di-minimize, dibangun menggunakan Tailwind CSS."}
+                     ]'>
+                    <h3 class="text-2xl font-bold text-white mb-3">Manajemen Inventori</h3>
+                    <p class="text-gray-300 mb-4">
+                        Aplikasi CRUD lengkap untuk manajemen inventori berbasis web. Dibangun menggunakan CodeIgniter 4 serta Laragon dengan fitur hak akses, ekspor data, dan dashboard dinamis.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">CodeIgniter 4</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">PHP</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Tailwind CSS</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Chart.js</span>
+                    </div>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>Fitur</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" 
+                     data-project-name="Sistem Pendukung Keputusan (Java DSS)" 
+                     data-project-features='[
+                         {"title": "Halaman Login", "image": "img/project5/1-halaman-login.PNG", "description": "Antarmuka login yang aman, bersih, dan modern menggunakan tema FlatLaf dengan efek placeholder pada input."},
+                         {"title": "Dashboard Utama", "image": "img/project5/2-dashboard-utama.PNG", "description": "Dashboard informatif untuk menampilkan, mengelola, dan memproses data alternatif dengan layout yang terstruktur."},
+                         {"title": "Proses Kalkulasi SAW", "image": "img/project5/3-proses-saw.PNG", "description": "Implementasi metode Simple Additive Weighting (SAW) untuk menghasilkan rekomendasi berdasarkan bobot yang dinamis."},
+                         {"title": "Manajemen Data (CRUD)", "image": "img/project5/4-form-manajemen-data.PNG", "description": "Fungsionalitas lengkap untuk Tambah, Ubah, dan Hapus data langsung dari antarmuka aplikasi ke database MySQL."},
+                         {"title": "Tema Mode Gelap", "image": "img/project5/5-tampilan-dark-mode.PNG", "description": "Aplikasi mendukung tema terang dan gelap untuk kenyamanan pengguna, menunjukkan fleksibilitas UI."}
+                     ]'>
+                    <h3 class="text-2xl font-bold text-white mb-3">Sistem Pendukung Keputusan</h3>
+                    <p class="text-gray-300 mb-4">
+                        Aplikasi desktop yang dibangun dengan Java Swing untuk membantu pengambilan keputusan menggunakan metode SAW. Dilengkapi manajemen data CRUD penuh dan antarmuka modern.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Java</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Java Swing</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">FlatLaf</span>
+                    </div>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>Fitur</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" 
+                     data-project-name="Bloguv: Aplikasi Blog Full-Stack" 
+                     data-project-features='[
+                         {"title": "Halaman Utama Publik", "image": "img/project6/bloguv_homepage.PNG", "description": "Desain homepage modern dan dinamis yang terinspirasi dari media profesional, menampilkan hero post dan grid artikel terbaru."},
+                         {"title": "Halaman Detail Artikel", "image": "img/project6/bloguv_artikel_detail.PNG", "description": "Tampilan bersih dengan fokus pada keterbacaan (gaya Medium), lengkap dengan gambar unggulan, social share, komentar, dan artikel terkait."},
+                         {"title": "Dashboard Admin Fungsional", "image": "img/project6/bloguv_admin_dashboard.PNG", "description": "Pusat informasi dengan statistik jumlah post, kategori, tag, dan komentar, serta menampilkan aktivitas terbaru."},
+                         {"title": "Editor Postingan Canggih", "image": "img/project6/bloguv_admin_editor.PNG", "description": "Implementasi Rich Text Editor (TinyMCE) dan input gambar dinamis yang mendukung upload lokal maupun via URL."},
+                         {"title": "Manajemen Pengguna & Role", "image": "img/project6/bloguv_admin_user_management.PNG", "description": "Sistem hak akses untuk membedakan peran Admin dan Penulis, di mana admin dapat mengelola semua pengguna."},
+                         {"title": "Moderasi Komentar", "image": "img/project6/bloguv_admin_moderasi_komentar.PNG", "description": "Admin dapat menyetujui atau menghapus komentar yang dikirim oleh pengunjung sebelum ditampilkan di halaman publik."},
+                         {"title": "Halaman Login Stylish", "image": "img/project6/bloguv_halaman_login.PNG", "description": "Desain ulang halaman otentikasi dengan layout dua panel yang modern dan menarik secara visual."}
+                     ]'>
+                    <h3 class="text-2xl font-bold text-white mb-3">Bloguv: Aplikasi Blog</h3>
+                    <p class="text-gray-300 mb-4">
+                        Aplikasi blog lengkap yang dibangun dari nol menggunakan Laravel 10. Mencakup panel admin komprehensif dengan sistem role, CRUD penuh, rich text editor, upload gambar, moderasi komentar, dan antarmuka publik yang modern.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Laravel 10</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">PHP</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Tailwind CSS</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">Alpine.js</span>
+                        <span class="bg-blue-700 text-white text-xs px-2 py-1 rounded-full">TinyMCE</span>
+                    </div>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>Fitur</span>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Bagian Kontak -->
     <section id="contact" class="py-20 px-4 bg-gray-900">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-8">Hubungi Saya</h2>
@@ -341,30 +361,26 @@
                     <i data-lucide="youtube" class="w-8 h-8 mb-2"></i>
                     <span class="text-sm">YouTube</span>
                 </a>
-                <!-- Tambahkan tautan sosial media lainnya -->
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 py-6 text-center text-gray-500 text-sm">
         <div class="container">
-            <p>&copy; <span id="current-year"></span> Julian. Semua Hak Dilindungi.</p>
+            <p>© <span id="current-year"></span> Julian. Semua Hak Dilindungi.</p>
             <p>Dibuat dengan <i data-lucide="heart" class="inline-block w-4 h-4 text-red-500"></i> dan semangat koding.</p>
         </div>
     </footer>
 
-    <!-- Modal untuk Keahlian -->
     <div id="skillModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close-button" id="closeSkillModalBtn">&times;</button>
+            <button class="modal-close-button" id="closeSkillModalBtn">×</button>
             <h3 id="modalSkillName" class="text-2xl font-bold text-white mb-4"></h3>
             <img id="modalSkillImage" src="" alt="Skill Image" class="modal-image">
             <p id="modalSkillDescription" class="text-gray-300"></p>
         </div>
     </div>
 
-    <!-- Modal Baru untuk Proyek -->
     <div id="projectModal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close-button" id="closeProjectModalBtn">×</button>
@@ -372,9 +388,9 @@
             
             <div class="flex flex-col md:flex-row gap-6">
                 <div id="modalProjectTabs" class="flex-shrink-0 md:w-1/4">
-                    </div>
+                </div>
                 <div id="modalProjectContent" class="flex-grow">
-                    </div>
+                </div>
             </div>
             </div>
     </div>
