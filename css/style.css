@@ -335,6 +335,12 @@
     footer p {
         font-size: 0.8rem;
     }
+    
+    .nav-active {
+        color: white;
+        background-color: #3B82F6; /* Warna biru, bisa disesuaikan */
+        font-weight: 600;
+    }
 }
 
 /* --- Gaya untuk Layar Tablet (Lebar Minimum 769px dan Maksimum 1024px) --- */

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="antialiased">
-    <header class="bg-gray-900 py-4 shadow-lg">
+    <header class="bg-gray-900 py-4 shadow-lg sticky top-0 z-50">
         <nav class="container flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white hover:text-gray-200 rounded-lg p-2 transition duration-300">
                 <Julian />
@@ -19,6 +19,7 @@
                 <li><a href="#about" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Tentang</a></li>
                 <li><a href="#skills" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Keahlian</a></li>
                 <li><a href="#projects" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Proyek</a></li>
+                <li><a href="#cv" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Curriculum Vitae</a></li>
                 <li><a href="#contact" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Kontak</a></li>
             </ul>
         </nav>
@@ -338,7 +339,22 @@
         </div>
     </section>
 
-    <section id="contact" class="py-20 px-4 bg-gray-900">
+    <section id="cv" class="py-20 px-4 bg-gray-900">
+        <div class="container text-center">
+            <h2 class="text-4xl font-bold text-white mb-8">Curriculum Vitae</h2>
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Lihat atau unduh CV lengkap saya dalam format PDF untuk informasi lebih rinci mengenai pengalaman dan kualifikasi saya.
+            </p>
+            
+            <a href="assets/CV_Julian.pdf" target="_blank" 
+               class="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
+                <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                <span>Unduh CV (PDF)</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-8">Hubungi Saya</h2>
             <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -397,176 +413,159 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Menginisialisasi ikon Lucide
+            // --- INISIALISASI DASAR ---
             lucide.createIcons();
-
-            // Mengatur tahun saat ini di footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
-
-            // Smooth scrolling untuk navigasi
-            document.querySelectorAll('header nav ul li a[href^="#"]').forEach(anchor => { // Selector lebih spesifik
+    
+            // --- LOGIKA SMOOTH SCROLL ---
+            document.querySelectorAll('header nav ul li a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
-                    if (targetId && targetId !== '#') { // Pastikan ID tidak kosong atau hanya '#'
-                        document.querySelector(targetId).scrollIntoView({
-                            behavior: 'smooth'
-                        });
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
             });
-
-            /* --- Logika untuk Panel Detail Keahlian --- */
+    
+            // --- LOGIKA NAVIGASI AKTIF SAAT SCROLL ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('header nav ul li a');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.6
+            };
+    
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('nav-active');
+                        });
+                        const id = entry.target.getAttribute('id');
+                        const correspondingLink = document.querySelector(`header nav ul li a[href="#${id}"]`);
+                        if (correspondingLink) {
+                            correspondingLink.classList.add('nav-active');
+                        }
+                    }
+                });
+            }, observerOptions);
+    
+            sections.forEach(section => {
+                if (section.id) { // Hanya amati section yang punya ID
+                   scrollObserver.observe(section);
+                }
+            });
+    
+            // --- LOGIKA PANEL DETAIL KEAHLIAN ---
             const skillButtons = document.querySelectorAll('.skill-item-v2');
             const skillPlaceholder = document.getElementById('skill-placeholder');
             const skillDetailContent = document.getElementById('skill-detail-content');
-            
             const detailImage = document.getElementById('skill-detail-image');
             const detailName = document.getElementById('skill-detail-name');
             const detailDescription = document.getElementById('skill-detail-description');
-
+    
             skillButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Hapus kelas 'active' dari semua tombol
                     skillButtons.forEach(btn => btn.classList.remove('active'));
-                    // Tambahkan kelas 'active' ke tombol yang diklik
                     this.classList.add('active');
-
-                    // Ambil data dari atribut data-*
                     const skillName = this.dataset.skillName;
                     const skillImage = this.dataset.skillImage;
                     const skillDescription = this.dataset.skillDescription;
-
-                    // Isi panel detail dengan data
                     detailName.textContent = skillName;
                     detailImage.src = skillImage;
                     detailImage.alt = skillName + " Image";
                     detailDescription.textContent = skillDescription;
-                    
-                    // Tampilkan panel detail dan sembunyikan placeholder
                     skillPlaceholder.classList.add('hidden');
                     skillDetailContent.classList.remove('hidden');
                 });
             });
-
-            // Tutup modal saat tombol ESC ditekan
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && skillModal.classList.contains('active')) {
-                    skillModal.classList.remove('active');
-                }
-            });
-
-                        /* --- Logika Modal Proyek (Versi Baru dengan Tab) --- */
+            
+            // --- LOGIKA MODAL PROYEK ---
             const projectDemoBtns = document.querySelectorAll('.project-demo-btn');
             const projectModal = document.getElementById('projectModal');
             const closeProjectModalBtn = document.getElementById('closeProjectModalBtn');
             const modalProjectName = document.getElementById('modalProjectName');
-
+    
             projectDemoBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
-
                     const projectCard = this.closest('.project-card');
                     const projectName = projectCard.dataset.projectName;
                     const projectFeaturesJson = projectCard.dataset.projectFeatures;
                     let projectFeatures = [];
-
                     try {
                         projectFeatures = JSON.parse(projectFeaturesJson);
                     } catch (error) {
-                        console.error("Error parsing project features JSON for " + projectName + ":", error);
+                        console.error("Error parsing project features JSON:", error);
                         return;
                     }
-
+    
                     modalProjectName.textContent = projectName;
                     
-                    // Bersihkan konten modal sebelumnya dan siapkan struktur baru
-                    const modalContentArea = document.querySelector('#projectModal .modal-content');
-                    // Hapus elemen lama jika ada
-                    const oldContainer = modalContentArea.querySelector('.flex.flex-col.md\\:flex-row');
-                    if (oldContainer) {
-                        oldContainer.remove();
-                    }
-
-                    // Buat container utama untuk tab dan konten
+                    const oldContainer = projectModal.querySelector('.flex.flex-col.md\\:flex-row');
+                    if (oldContainer) oldContainer.remove();
+    
                     const mainContainer = document.createElement('div');
-                    mainContainer.className = 'flex flex-col md:flex-row gap-6 mt-4'; // mt-4 untuk spasi dari judul
-
-                    // Buat container untuk tombol tab (kolom kiri)
+                    mainContainer.className = 'flex flex-col md:flex-row gap-6 mt-4';
                     const tabsContainer = document.createElement('div');
                     tabsContainer.id = 'modalProjectTabs';
                     tabsContainer.className = 'flex-shrink-0 md:w-1/4 overflow-y-auto md:max-h-[60vh]';
-
-                    // Buat container untuk konten tab (kolom kanan)
                     const contentContainer = document.createElement('div');
                     contentContainer.id = 'modalProjectContent';
                     contentContainer.className = 'flex-grow';
-
-                    // Isi container dengan fitur-fitur dari data
+    
                     projectFeatures.forEach((feature, index) => {
-                        // 1. Buat Tombol Tab
                         const tabButton = document.createElement('button');
                         tabButton.className = 'tab-button';
                         tabButton.textContent = feature.title;
-                        tabButton.dataset.target = `feature-${index}`; // Buat target unik untuk setiap konten
+                        tabButton.dataset.target = `feature-${index}`;
                         tabsContainer.appendChild(tabButton);
-
-                        // 2. Buat Konten Tab
+    
                         const tabContent = document.createElement('div');
                         tabContent.className = 'tab-content';
-                        tabContent.id = `feature-${index}`; // ID yang cocok dengan data-target
-                        
-                        // Isi konten dengan gambar, judul, dan deskripsi
+                        tabContent.id = `feature-${index}`;
                         tabContent.innerHTML = `
-                            <img src="${feature.image}" alt="${feature.title}" class="modal-image" onerror="this.src='https://placehold.co/400x250/FF0000/FFFFFF?text=Gambar+Rusak';">
-                            <h4 class="text-xl font-semibold text-blue-400 mb-2">${feature.title}</h4>
+                            <img src="${feature.image}" alt="${feature.title}" class="modal-image" onerror="this.style.display='none'">
+                            <h4 class="text-xl font-semibold text-blue-400 my-2">${feature.title}</h4>
                             <p class="text-gray-300">${feature.description}</p>
                         `;
                         contentContainer.appendChild(tabContent);
-
-                        // Atur tab pertama sebagai aktif secara default
+    
                         if (index === 0) {
                             tabButton.classList.add('active');
                             tabContent.classList.add('active');
                         }
                     });
-
-                    // Tambahkan fungsi klik untuk setiap tombol tab
+    
                     tabsContainer.querySelectorAll('.tab-button').forEach(button => {
                         button.addEventListener('click', function() {
-                            // Hapus kelas 'active' dari semua tombol dan konten
                             tabsContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
                             contentContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-                            // Tambahkan kelas 'active' ke tombol yang diklik dan konten targetnya
                             this.classList.add('active');
-                            const targetId = this.dataset.target;
-                            document.getElementById(targetId).classList.add('active');
+                            document.getElementById(this.dataset.target).classList.add('active');
                         });
                     });
                     
-                    // Gabungkan semuanya ke dalam modal
                     mainContainer.appendChild(tabsContainer);
                     mainContainer.appendChild(contentContainer);
-                    // Tambahkan setelah judul modal
                     modalProjectName.after(mainContainer);
-
-                    projectModal.classList.add('active'); // Tampilkan modal
+                    projectModal.classList.add('active');
                 });
             });
-
-            // Kode untuk menutup modal (tidak perlu diubah)
-            closeProjectModalBtn.addEventListener('click', function() {
-                projectModal.classList.remove('active');
+    
+            // Event listener untuk menutup modal proyek
+            const closeModal = () => projectModal.classList.remove('active');
+            closeProjectModalBtn.addEventListener('click', closeModal);
+            projectModal.addEventListener('click', (e) => {
+                if (e.target === projectModal) closeModal();
             });
-            projectModal.addEventListener('click', function(e) {
-                if (e.target === projectModal) {
-                    projectModal.classList.remove('active');
-                }
-            });
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && projectModal.classList.contains('active')) {
-                    projectModal.classList.remove('active');
+                    closeModal();
                 }
             });
         });
