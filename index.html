@@ -374,28 +374,66 @@
     <section id="templates" class="py-20 px-4 bg-gray-900">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-12">Template Demo Pilihan</h2>
-            <div class="flex justify-center">
-                <div class="project-card md:w-2/3 lg:w-1/2" 
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="project-card text-left" 
+                     data-project-name="Template Profil Sekolah" 
+                     data-project-features='[
+                         {"title": "Desain Modern & Responsif", "image": "img/sekolah/sekolah-responsif.PNG", "description": "Tampilan yang bersih dan profesional, sepenuhnya beradaptasi di berbagai perangkat, dari desktop hingga mobile."},
+                         {"title": "Navigasi Slide-In Mobile", "image": "img/sekolah/sekolah-menu.PNG", "description": "Menu hamburger yang fungsional dengan animasi slide-in yang mulus untuk pengalaman pengguna mobile yang optimal."},
+                         {"title": "Galeri Foto dengan Lightbox", "image": "img/sekolah/sekolah-galeri.PNG", "description": "Galeri gambar yang interaktif, di mana setiap gambar dapat diperbesar untuk dilihat lebih detail tanpa meninggalkan halaman."},
+                         {"title": "Jadwal Pelajaran Interaktif", "image": "img/sekolah/sekolah-jadwal.PNG", "description": "Fitur tab untuk menampilkan jadwal pelajaran yang berbeda untuk setiap tingkatan kelas secara dinamis."},
+                         {"title": "Showcase Ekstrakurikuler", "image": "img/sekolah/sekolah-ekskul.PNG", "description": "Galeri kegiatan ekstrakurikuler yang dapat difilter berdasarkan kategori seperti Olahraga, Seni, dan Akademik."},
+                         {"title": "Alur Pendaftaran Informatif", "image": "img/sekolah/sekolah-pendaftaran.PNG", "description": "Bagian khusus yang menjelaskan alur pendaftaran langkah demi langkah, lengkap dengan tanggal penting dan tombol unduh brosur."},
+                         {"title": "Komponen FAQ Accordion", "image": "img/sekolah/sekolah-faq.PNG", "description": "Bagian Tanya Jawab yang interaktif di mana jawaban dapat dibuka-tutup untuk menghemat ruang dan meningkatkan kerapian."}
+                     ]'>
+                    <h3 class="text-2xl font-bold text-white mb-3">Template Profil Sekolah</h3>
+                    <p class="text-gray-300 mb-4">
+                        Template website profil sekolah yang modern, responsif, dan kaya fitur. Dibangun dari nol hanya dengan HTML, CSS, dan JavaScript murni untuk memastikan performa yang cepat dan kemudahan kustomisasi.
+                    </p>
+                    <div class="flex flex-wrap justify-start gap-2 mb-4">
+                        <span class="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">HTML5</span>
+                        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">CSS3</span>
+                        <span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">JavaScript</span>
+                    </div>
+                    <div class="flex justify-start space-x-4 mt-6">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300 font-semibold">
+                            <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                            <span>Lihat Fitur</span>
+                        </a>
+                        <a href="https://oxyrus69.github.io/proyek-profil-sekolah/" target="_blank" class="flex items-center space-x-2 text-green-400 hover:text-green-300 font-semibold">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>Live Demo</span>
+                        </a>
+                        <a href="https://github.com/oxyrus69/proyek-profil-sekolah" target="_blank" class="flex items-center space-x-2 text-gray-400 hover:text-gray-300 font-semibold">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                            <span>Source Code</span>
+                        </a>
+                    </div>
+                </div>
+    
+                <div class="project-card text-left" 
                      data-project-name="Template Learning Management System (LMS)" 
                      data-project-features='[
-                        {"title": "Halaman Login", "image": "img/lms/login.PNG", "description": "Antarmuka login yang aman (disimulasikan)."},
-                        {"title": "Dashboard", "image": "img/lms/dashboard.PNG", "description": "Antarmuka login yang aman (disimulasikan) dan dashboard utama yang informatif sebagai pusat navigasi pengguna."},
-                        {"title": "Alur Mata Kuliah Lengkap", "image": "img/lms/course-detail.PNG", "description": "Pengguna dapat melihat daftar mata kuliah, masuk ke halaman detail, melihat materi pelajaran dalam format accordion, hingga mengerjakan kuis."},
-                        {"title": "Halaman Kuis Interaktif", "image": "img/lms/quiz.PNG", "description": "Template halaman kuis yang mendukung berbagai jenis soal seperti pilihan ganda dan esai, lengkap dengan timer dan instruksi."},
-                        {"title": "Forum Diskusi", "image": "img/lms/forum.PNG", "description": "Fitur komunitas dengan halaman daftar topik dan halaman detail untuk melihat post asli beserta balasannya."},
-                        {"title": "Desain Responsif & Modern", "image": "img/lms/mobile-view.png", "description": "Tampilan yang sepenuhnya responsif dengan menu hamburger di perangkat mobile, memastikan pengalaman pengguna yang baik di semua perangkat."},
-                        {"title": "Mode Terang & Gelap", "image": "img/lms/dark-mode.PNG", "description": "Fungsionalitas theme switcher yang persisten (mengingat pilihan pengguna) untuk beralih antara mode terang dan gelap demi kenyamanan mata."}
+                         {"title": "Halaman Login", "image": "img/lms/login.PNG", "description": "Antarmuka login yang aman (disimulasikan)."},
+                         {"title": "Dashboard", "image": "img/lms/dashboard.PNG", "description": "Antarmuka login yang aman (disimulasikan) dan dashboard utama yang informatif sebagai pusat navigasi pengguna."},
+                         {"title": "Alur Mata Kuliah Lengkap", "image": "img/lms/course-detail.PNG", "description": "Pengguna dapat melihat daftar mata kuliah, masuk ke halaman detail, melihat materi pelajaran dalam format accordion, hingga mengerjakan kuis."},
+                         {"title": "Halaman Kuis Interaktif", "image": "img/lms/quiz.PNG", "description": "Template halaman kuis yang mendukung berbagai jenis soal seperti pilihan ganda dan esai, lengkap dengan timer dan instruksi."},
+                         {"title": "Forum Diskusi", "image": "img/lms/forum.PNG", "description": "Fitur komunitas dengan halaman daftar topik dan halaman detail untuk melihat post asli beserta balasannya."},
+                         {"title": "Desain Responsif & Modern", "image": "img/lms/mobile-view.png", "description": "Tampilan yang sepenuhnya responsif dengan menu hamburger di perangkat mobile, memastikan pengalaman pengguna yang baik di semua perangkat."},
+                         {"title": "Mode Terang & Gelap", "image": "img/lms/dark-mode.PNG", "description": "Fungsionalitas theme switcher yang persisten (mengingat pilihan pengguna) untuk beralih antara mode terang dan gelap demi kenyamanan mata."}
                      ]'>
                     <h3 class="text-2xl font-bold text-white mb-3">Template Learning Management System (LMS)</h3>
                     <p class="text-gray-300 mb-4">
                         Template frontend LMS yang kaya fitur, dibangun dari nol hanya dengan HTML, CSS, dan JavaScript murni. Mencakup alur pengguna yang lengkap, desain responsif, dan tema terang/gelap. Gunakan email: user@example.com dan kata sandi: password123.
                     </p>
-                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                    <div class="flex flex-wrap justify-start gap-2 mb-4">
                         <span class="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">HTML5</span>
                         <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">CSS3</span>
                         <span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">JavaScript</span>
                     </div>
-                    <div class="flex justify-center md:justify-start space-x-4 mt-6">
+                    <div class="flex justify-start space-x-4 mt-6">
                         <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300 font-semibold">
                             <i data-lucide="layout-grid" class="w-5 h-5"></i>
                             <span>Lihat Fitur</span>
@@ -410,6 +448,7 @@
                         </a>
                     </div>
                 </div>
+    
             </div>
         </div>
     </section>
