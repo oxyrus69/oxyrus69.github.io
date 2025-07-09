@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="antialiased">
-    <header class="bg-gray-900 py-4 shadow-lg sticky top-0 z-50">
+    <header class="bg-gray-900 py-4 shadow-lg">
         <nav class="container flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white hover:text-gray-200 rounded-lg p-2 transition duration-300">
                 <Julian />
@@ -19,6 +19,7 @@
                 <li><a href="#about" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Tentang</a></li>
                 <li><a href="#skills" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Keahlian</a></li>
                 <li><a href="#projects" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Proyek</a></li>
+                <li><a href="#templates" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Template</a></li>
                 <li><a href="#cv" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Curriculum Vitae</a></li>
                 <li><a href="#contact" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Kontak</a></li>
             </ul>
@@ -50,7 +51,7 @@
                     Saya adalah seorang pengembang perangkat lunak yang bersemangat dengan fokus pada <span class="text-blue-400 font-semibold">pengembangan web full-stack</span>.
                 </p>
                 <p class="mb-4">
-                    Filosofi saya dalam coding adalah <span class="text-green-400 font-semibold">kesederhanaan, efisiensi, dan keterbacaan</span>. Saya percaya bahwa kode yang baik tidak hanya berfungsi, tetapi juga mudah dipahami dan dipelihara oleh orang lain (termasuk diri saya sendiri di masa depan!). Saya selalu mencari cara untuk belajar teknologi baru dan meningkatkan keterampilan saya.
+                    Filosofi saya dalam coding adalah <span class="text-green-400 font-semibold">kemudahan, efisiensi, dan keterbacaan</span>. Saya percaya bahwa kode yang baik tidak hanya berfungsi, tetapi juga mudah dipahami dan dipelihara oleh orang lain (termasuk diri saya sendiri di masa depan!). Saya selalu mencari cara untuk belajar teknologi baru dengan panduan <span class="text-red-400 font-semibold">Artificial Intelligence</span> dan meningkatkan keterampilan saya.
                 </p>
                 <p>
                     Ketika tidak sedang coding, saya biasanya <span class="text-yellow-400 font-semibold">membaca buku, bermain game, atau menulis cerita sederhana.</span>
@@ -370,7 +371,50 @@
         </div>
     </section>
 
-    <section id="cv" class="py-20 px-4 bg-gray-900">
+    <section id="templates" class="py-20 px-4 bg-gray-900">
+        <div class="container text-center">
+            <h2 class="text-4xl font-bold text-white mb-12">Template Demo Pilihan</h2>
+            <div class="flex justify-center">
+                <div class="project-card md:w-2/3 lg:w-1/2" 
+                     data-project-name="Template Learning Management System (LMS)" 
+                     data-project-features='[
+                        {"title": "Halaman Login", "image": "img/lms/login.PNG", "description": "Antarmuka login yang aman (disimulasikan)."},
+                        {"title": "Dashboard", "image": "img/lms/dashboard.PNG", "description": "Antarmuka login yang aman (disimulasikan) dan dashboard utama yang informatif sebagai pusat navigasi pengguna."},
+                        {"title": "Alur Mata Kuliah Lengkap", "image": "img/lms/course-detail.PNG", "description": "Pengguna dapat melihat daftar mata kuliah, masuk ke halaman detail, melihat materi pelajaran dalam format accordion, hingga mengerjakan kuis."},
+                        {"title": "Halaman Kuis Interaktif", "image": "img/lms/quiz.PNG", "description": "Template halaman kuis yang mendukung berbagai jenis soal seperti pilihan ganda dan esai, lengkap dengan timer dan instruksi."},
+                        {"title": "Forum Diskusi", "image": "img/lms/forum.PNG", "description": "Fitur komunitas dengan halaman daftar topik dan halaman detail untuk melihat post asli beserta balasannya."},
+                        {"title": "Desain Responsif & Modern", "image": "img/lms/mobile-view.png", "description": "Tampilan yang sepenuhnya responsif dengan menu hamburger di perangkat mobile, memastikan pengalaman pengguna yang baik di semua perangkat."},
+                        {"title": "Mode Terang & Gelap", "image": "img/lms/dark-mode.PNG", "description": "Fungsionalitas theme switcher yang persisten (mengingat pilihan pengguna) untuk beralih antara mode terang dan gelap demi kenyamanan mata."}
+                     ]'>
+                    <h3 class="text-2xl font-bold text-white mb-3">Template Learning Management System (LMS)</h3>
+                    <p class="text-gray-300 mb-4">
+                        Template frontend LMS yang kaya fitur, dibangun dari nol hanya dengan HTML, CSS, dan JavaScript murni. Mencakup alur pengguna yang lengkap, desain responsif, dan tema terang/gelap. Gunakan email: user@example.com dan kata sandi: password123.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        <span class="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">HTML5</span>
+                        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">CSS3</span>
+                        <span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">JavaScript</span>
+                    </div>
+                    <div class="flex justify-center md:justify-start space-x-4 mt-6">
+                        <a href="#" class="project-demo-btn flex items-center space-x-2 text-blue-400 hover:text-blue-300 font-semibold">
+                            <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                            <span>Lihat Fitur</span>
+                        </a>
+                        <a href="https://oxyrus69.github.io/lms-template/" target="_blank" class="flex items-center space-x-2 text-green-400 hover:text-green-300 font-semibold">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>Live Demo</span>
+                        </a>
+                        <a href="https://github.com/oxyrus69/lms-template" target="_blank" class="flex items-center space-x-2 text-gray-400 hover:text-gray-300 font-semibold">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                            <span>Source Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cv" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-8">Curriculum Vitae</h2>
             <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -385,7 +429,7 @@
         </div>
     </section>
 
-    <section id="contact" class="py-20 px-4 bg-gray-800">
+    <section id="contact" class="py-20 px-4 bg-gray-900">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-8">Hubungi Saya</h2>
             <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
