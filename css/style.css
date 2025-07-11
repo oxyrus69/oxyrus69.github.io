@@ -517,25 +517,27 @@
     font-weight: 600;
 }
 
-/* --- GAYA UNTUK DROPDOWN NAVIGASI DESKTOP --- */
+/* --- GAYA UNTUK DROPDOWN NAVIGASI (DESKTOP & MOBILE) --- */
 
-/* Hanya terapkan gaya dropdown di layar desktop (lebar 768px ke atas) */
+/* ================================= */
+/* === TAMPILAN DESKTOP (DROPDOWN AKTIF) === */
+/* ================================= */
 @media (min-width: 768px) {
     /* Kontainer untuk item dropdown */
     .nav-item-dropdown {
-        position: relative; /* Diperlukan agar dropdown muncul di posisi yang benar */
+        position: relative;
     }
 
     /* Menu dropdown itu sendiri */
     .dropdown-menu {
-        display: none; /* Sembunyikan secara default */
+        display: none;
         position: absolute;
-        top: 100%; /* Muncul tepat di bawah item "Karya" */
+        top: 100%;
         left: 0;
-        background-color: #1f2937; /* Warna latar dropdown */
-        border-radius: 0.5rem; /* rounded-lg */
+        background-color: #1f2937;
+        border-radius: 0.5rem;
         padding: 0.5rem;
-        min-width: 200px; /* Lebar minimum dropdown */
+        min-width: 200px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         z-index: 50;
         opacity: 0;
@@ -554,15 +556,49 @@
     .dropdown-link {
         display: block;
         padding: 0.75rem 1rem;
-        color: #cbd5e0; /* Warna teks */
-        border-radius: 0.375rem; /* rounded-md */
+        color: #cbd5e0;
+        border-radius: 0.375rem;
         transition: all 0.2s ease;
-        white-space: nowrap; /* Mencegah teks turun baris */
+        white-space: nowrap;
     }
 
     .dropdown-link:hover {
-        background-color: #4a5568; /* Warna latar saat hover */
+        background-color: #4a5568;
         color: #ffffff;
+    }
+}
+
+
+/* ================================================= */
+/* === PERBAIKAN TAMPILAN MOBILE (DROPDOWN NONAKTIF) === */
+/* ================================================= */
+@media (max-width: 767px) {
+    /* Sembunyikan pemicu dropdown "Karya" beserta panahnya di mobile */
+    .nav-item-dropdown > a.nav-link {
+        display: none;
+    }
+
+    /* "Bongkar" menu dropdown agar isinya terlihat */
+    .dropdown-menu {
+        display: contents; /* Trik CSS: membuat <ul> seolah tidak ada */
+    }
+    
+    /* Item di dalam dropdown sekarang akan bertindak seperti item nav biasa */
+    .dropdown-menu li {
+        width: 100%;
+    }
+
+    /* Beri gaya pada link dropdown agar sama persis dengan link navigasi lainnya */
+    .dropdown-menu li .dropdown-link {
+        display: block;
+        color: #cbd5e0;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+    }
+
+    .dropdown-menu li .dropdown-link:hover {
+        color: #ffffff;
+        background-color: #4a5568;
     }
 }
 
