@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body class="antialiased">
     <header class="bg-gray-900 py-2 shadow-lg sticky top-0 z-50"> <nav class="container flex justify-between items-center relative">
@@ -21,6 +22,7 @@
                 <span class="text-gray-500">|</span>
                 <button data-lang="en" class="lang-btn">EN</button>
             </div>
+
 
         <button id="menu-toggle" class="md:hidden p-2 rounded-md text-white hover:bg-gray-700">
             <i data-lucide="menu" class="w-6 h-6"></i>
@@ -54,7 +56,7 @@
     </nav>
 </header>
 
-    <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 py-16 bg-gradient-to-br from-gray-900 to-black">
+    <section id="home" data-title="Home - Portofolio Julian" class="min-h-screen flex items-center justify-center text-center px-4 py-16 bg-gradient-to-br from-gray-900 to-black">
         <div class="space-y-6">
             <h1 data-key="home_greeting" class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
                 Halo, saya <span class="text-blue-400">Julian</span>.
@@ -71,10 +73,10 @@
         </div>
     </section>
 
-    <section id="about" class="py-20 px-4 bg-gray-800">
+    <section id="about" data-title="Tentang Saya - Portofolio Julian" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
-            <h2 class="text-4xl font-bold text-white mb-8" data-key="about_title">Tentang Saya</h2>
-            <div class="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
+            <h2 data-aos="fade-up" class="text-4xl font-bold text-white mb-8" data-key="about_title">Tentang Saya</h2>
+            <div data-aos="fade-up" data-aos-delay="200" class="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
                 <p class="mb-4" data-key="about_p1">
                     Saya adalah seorang pengembang perangkat lunak junior yang bersemangat dengan fokus pada <span class="text-blue-400 font-semibold">pengembangan web full-stack</span> dan pengguna <span class="text-red-400 font-semibold">adaptif</span> perangkat lunak yang beragam. 
                 </p>
@@ -88,13 +90,13 @@
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-4 bg-gray-900">
+    <section id="skills" data-title="Skills - Portofolio Julian" class="py-20 px-4 bg-gray-900">
         <div class="container">
-            <h2 class="text-4xl font-bold text-white mb-12 text-center" data-key="skills_title">Keahlian Saya</h2>
+            <h2 data-aos="fade-up" class="text-4xl font-bold text-white mb-12 text-center" data-key="skills_title">Keahlian Saya</h2>
             
             <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
                 
-                <div class="w-full md:w-1/2 lg:w-2/5">
+                <div data-aos="fade-right" class="w-full md:w-1/2 lg:w-2/5">
                     <div class="space-y-8">
                         <div>
                             <h3 class="text-xl font-semibold text-blue-400 mb-4" data-key="skills_p1">Bahasa & Database</h3>
@@ -151,7 +153,7 @@
                     </div>
                 </div>
     
-                <div class="w-full md:w-1/2 lg:w-3/5">
+                <div data-aos="fade-left" class="w-full md:w-1/2 lg:w-3/5">
                     <div id="skill-detail-panel" class="bg-gray-800 p-8 rounded-lg sticky top-8">
                         <div id="skill-placeholder" class="text-center text-gray-500 transition-opacity duration-300">
                             <i data-lucide="mouse-pointer-click" class="w-16 h-16 mx-auto mb-4"></i>
@@ -168,11 +170,11 @@
         </div>
     </section>
 
-    <section id="projects" class="py-20 px-4 bg-gray-800">
+    <section id="projects" data-title="Proyek - Portofolio Julian" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-12" data-key="projects_title">Proyek Pilihan</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="100" class="project-card" 
                      data-project-name="E-Purchasing" 
                      data-project-features='[
                          {"title": "Login", "image": "img/project1/login.PNG", "description": "Antarmuka login yang bersih, elegan."},
@@ -207,7 +209,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="200" class="project-card" 
                      data-project-name="SIMPEG-Karyawan" 
                      data-project-features='[
                          {"title": "Login", "image": "img/project2/login.PNG", "description": "Antarmuka login yang bersih, elegan."},
@@ -239,7 +241,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="300" class="project-card" 
                      data-project-name="TokoKu" 
                      data-project-features='[
                      {"title": "Login", "image": "img/project3/login.PNG", "description": "Antarmuka login yang bersih, elegan, stylish."},
@@ -277,7 +279,7 @@
                     </div>
                 </div>
                 
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="400"class="project-card" 
                      data-project-name="Manajemen Inventori" 
                      data-project-features='[
                          {"title": "Login & Hak Akses", "image": "img/project4/login.PNG", "description": "Halaman login yang aman dengan sistem hak akses untuk membedakan Admin dan Staff."},
@@ -307,7 +309,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="500" class="project-card" 
                      data-project-name="Sistem Pendukung Keputusan (Java DSS)" 
                      data-project-features='[
                          {"title": "Halaman Login", "image": "img/project5/1-halaman-login.PNG", "description": "Antarmuka login yang aman, bersih, dan modern menggunakan tema FlatLaf dengan efek placeholder pada input."},
@@ -334,7 +336,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="600" class="project-card" 
                      data-project-name="Bloguv: Aplikasi Blog Full-Stack" 
                      data-project-features='[
                          {"title": "Halaman Utama Publik", "image": "img/project6/bloguv_homepage.PNG", "description": "Desain homepage modern dan dinamis yang terinspirasi dari media profesional, menampilkan hero post dan grid artikel terbaru."},
@@ -364,7 +366,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="project-card" 
+                <div data-aos="fade-up" data-aos-delay="700" class="project-card" 
                    data-project-name="PresenceCorp: Sistem Presensi" 
                    data-project-features='[
                         {"title": "Halaman Login Stylish", "image": "img/project7/login.PNG", "description": "Desain halaman login modern dengan layout split-screen untuk memberikan kesan pertama yang profesional dan menarik."},
@@ -400,13 +402,13 @@
         </div>
     </section>
 
-    <section id="templates" class="py-20 px-4 bg-gray-900">
+    <section id="templates" data-title="Template Demo - Portofolio Julian" class="py-20 px-4 bg-gray-900">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-12" data-key="templates_title">Template Demo Pilihan</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="project-card text-left" 
+                <div data-aos="fade-up" data-aos-delay="100" class="project-card text-left" 
                      data-project-name="Template Profil Sekolah" 
                      data-project-features='[
                          {"title": "Desain Modern & Responsif", "image": "img/sekolah/sekolah-responsif.PNG", "description": "Tampilan yang bersih dan profesional, sepenuhnya beradaptasi di berbagai perangkat, dari desktop hingga mobile."},
@@ -442,7 +444,7 @@
                     </div>
                 </div>
     
-                <div class="project-card text-left" 
+                <div data-aos="fade-up" data-aos-delay="200" class="project-card text-left" 
                      data-project-name="Template Learning Management System (LMS)" 
                      data-project-features='[
                          {"title": "Halaman Login", "image": "img/lms/login.PNG", "description": "Antarmuka login yang aman (disimulasikan)."},
@@ -482,27 +484,12 @@
         </div>
     </section>
 
-    <section id="writings" class="py-20 px-4 bg-gray-800">
+    <section id="writings" data-title="Antologi - Portofolio Julian" class="py-20 px-4 bg-gray-800">
         <div class="container">
-            <h2 class="text-4xl font-bold text-white mb-12 text-center" data-key="writings_title">Antologi</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <h2 data-aos="fade-up" class="text-4xl font-bold text-white mb-12 text-center" data-key="writings_title">Antologi</h2>
+            <div data-aos="fade-up" data-aos-delay="200" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     
-                <div class="project-card" 
-                     data-writing-type="tabbed"
-                     data-writing-title="Jalan Mati Hypnus"
-                     data-writing-pages='[
-                        {"title": "Bagian 1: Terjaga", "image": "img/writings/terjaga.jpg", "content": "<p>Hari berputar, begitupula dengan pikiran; kesadaran berkicau menarik pandangan. Mata tertuju pada sang pengembara. Apa yang sedang pengembara malang itu lakukan? Bukankah sang raja melontarkan kenikmatan padanya?</p><p class=mt-4>Dentuman keras dari kakinya mengalihkan perhatian si pengembara; kebingungan melanda dia. Bukankah engkau telah mengobrak-abrik ketahanan ku? Apalagi yang akan terjadi? Terdiam, mencari pengobatan yang selalu raja Hypnus berikan mendadak menghilang; Ah sepertinya diriku terlalu erat menutup pintu! Sungguh, keterjagaanmu membuatmu menahan batu besar. Larikan nafasmu pada pintu dua arah itu. Senantiasa sang raja akan mengobati dirimu, wahai pengembara!</p>"},
-                        {"title": "Bagian 2: Sembahan Dimensi", "image": "img/writings/sembahan-dimensi.jpg", "content": "<p>Angin besar menendang remedi raja Hypnus; namun beliau tidak bingung melainkan tersenyum menatap angin itu. Kendati demikian pula para penikmat sandiwara; Menikmati indahnya kepalsuan yang disampaikan kepada pengikutnya!</p><p class=mt-4>Raja Hypnus mengelus bangkai para penjaga dan berterimakasih karena akhirnya mereka menerima kenikmatan raja. Pengembara di lain waktu akan seperti penjaga itu; akankah ia bertahan? apakah kenikmatan Hypnus diterima ketika sekarat? Dimensi berputar sangat cepat dalam keheningan nan kegelapan menggoyangkan konsistensi moralitas. Ini mungkin terjadi dan akan terus terjadi.</p>"},
-                        {"title": "Bagian 3: Perihal Sempurna", "image": "img/writings/perihal-sempurna.jpg", "content": "<p>Di tengah pulau, raja Hypnus duduk manis bersama kerang berbuahkan mutiara, kura-kura berguling-guling menangis bahagia melihat kehadiran sang pemberi nikmat. Hewan-hewan berlarian kesana, memancing penasaran terhadap raja.</p><p class=mt-4>Mereka bertanya, mengapa engkau sangat diidolakan oleh penghuni Seika? apakah karena menjadi raja? tidakkah kau lihat betapa nikmatnya bercinta dengan para penghuni disini? bahkan kura-kura dengan tempurung tebal mampu menggulingkan dirinya sendiri; aku tidak bermaksud jahat, namun ini adalah karunia terbaik dariku yang ku lontarkan kepada kalian!</p><p class=mt-4>Sepanjang hari mereka bercakap-cakap dengan Hypnus, hingga tak sadar lupa akan kebajikan yang harus dilakukan. Raja terbang keatas dan menunjukkan langit multidimensi; janganlah kalian berada disini, karena ini akan menipumu terhadap kebajikan dan terbalik oleh kekecewaan!</p>"},
-                        {"title": "Bagian 4: Kunci", "image": "img/writings/kunci.jpg", "content": "<p>Langit mendorong penghuni Seika, memaksa mereka menyimpan kenikmatan yang diberikan oleh Hypnus; Membawa kembali jubah penjaga. Saatnya mengitari kota Keis. Warna warni berdatangan menyambut para penjaga; Ah sepertinya momen ini telah datang kepadamu. Lari dan lambaikan tangan rusakmu itu!</p><p class=mt-4>Patung raksasa menjulang tinggi menyebarkan debu kepahitan yang jujur kepada para penari; Menggoda mereka bagaikan anggur tercinta. Langit menarik siang dan menaikkan malam pada panggung megah. Penjaga berlarian menghindari patung itu, mulai mencari lukisan-lukisan imut nan menawan; Membakar debu pahit yang jujur dengan kesempurnaan dimensi palsu; Siapakah yang telah mendapatkan jawaban?</p>"},
-                        {"title": "Bagian 5: Terbuka", "image": "img/writings/terbuka.jpg", "content": "<p>Sungguh romantis sosok pasangan disana; Saling membunuh keegoisan yang meronta-ronta. Debu-debu mewarnai momen mereka, layaknya pasangan terbaik! Pisau menancap pada lukisan bersama, mematahkan jiwa yang mendalam disana; Sungguh keberanian yang tak biasa oleh penjaga itu.</p><p class=mt-4>Aliran darah bertepuk tangan dengan seru, panggung ini hanya untuk dirimu semata! Gembok melarikan diri dari jeruji cinta yang dibangun oleh Hypnus; Ia sangat terjaga hingga lupa kenikmatan. Sungguh disayangkan sekali, akan terjadi pembunuhan jiwa akibat pembangunan sosial yang melintasi gembok. Hypnus menari-nari karena itulah kebenaran yang perlu dilakukan, darah segar membasahi pipinya yang anggun; Nikmat, ini kenikmatan yang memberkati kalian semua!</p>"},
-                        {"title": "Bagian 6: Penerangan", "image": "img/writings/penerangan.jpg", "content": "<p>Lampu jalanan menyorotiku, seakan akan menelanjangiku dan berkata ‘hey, lihatlah dirimu! tidak ada apa apanya’.</p><p class=mt-4>Aku terdiam sejenak. Merenungi nasib dan takdir yang mempermainkanku. Apakah aku seburuk itu? Apakah aku tidak pantas untuk bahagia? Batinku bertanya-tanya.</p>"},
-                        {"title": "Bagian 7: Terlalu Terang...", "image": "img/writings/terlalu-terang-dalam-gelap.jpg", "content": "<p>Lagi-lagi aku terjebak dalam dikotomi ini; terlalu banyak hal yang membuatku bingung hingga aku melupakan jati diriku sendiri.</p><p class=mt-4>Saat aku berada di keramaian, aku merasa kesepian. Saat aku sendiri, aku merindukan keramaian.</p><p class=mt-4>Aneh bukan?</p>"},
-                        {"title": "Bagian 8: Menari", "image": "img/writings/menari.jpg", "content": "<p>Dalam keheningan malam, aku melihat bayanganku sendiri menari di dinding. Ia bergerak bebas, tanpa beban, tanpa rasa takut.</p><p class=mt-4>Andai saja aku bisa seperti bayanganku, menari tanpa harus memikirkan pandangan orang lain.</p>"},
-                        {"title": "Bagian 9: Letih", "image": "img/writings/letih.jpg", "content": "<p>Tubuhku terasa berat, setiap langkah seolah menjadi beban yang tak tertanggungkan. Mataku sayu, memandang dunia dengan tatapan kosong.</p><p class=mt-4>Aku lelah, bukan karena aktivitas fisik, tapi karena pertarungan batin yang tak kunjung usai. Pertarungan antara harapan dan kenyataan, antara keinginan dan keterbatasan.</p>"},
-                        {"title": "Bagian 10: Krisis Ambiguitas", "image": "img/writings/krisis-ambiguitas.jpg", "content": "<p>Aku berada di persimpangan jalan, sebuah labirin tanpa peta yang jelas. Setiap jalur menjanjikan sesuatu yang berbeda, namun juga penuh dengan ketidakpastian.</p><p class=mt-4>Haruskah aku memilih jalan yang aman, jalan yang sudah dilalui banyak orang? Atau haruskah aku memilih jalan yang sepi, jalan yang belum pernah dijelajahi siapapun?</p><p class=mt-4>Aku terjebak dalam krisis ambiguitas, sebuah krisis yang membuatku ragu akan setiap pilihan yang akan kuambil.</p>"}
-                     ]'>
-    
+                <div data-aos="fade-up" data-aos-delay="100" class="project-card" data-id="antologi-mata-batin">
                     <img src="img/writings/menari.jpg" alt="Gambar Antologi Tulisan" class="card-image">
                     <div class="card-content">
                         <h3 class="text-2xl font-bold text-white mb-3" data-key="hypnus_title">Jalan Mati Hypnus</h3>
@@ -521,22 +508,7 @@
                     </div>
                 </div>
     
-                <div class="project-card" 
-                data-writing-type="tabbed"
-                data-writing-title="Anarkisme, Nihilisme Bias"
-                data-writing-pages='[
-                   {"title": "Cerita 1: Gebrakan", "image": "img/writings/gebrakan.jpg", "content": "<p>Aku masih ingat; saat pertama kali aku melakukan ‘gebrakan’ yang cukup berani dalam hidupku...</p><p class=mt-4>Saat itu aku masih duduk di bangku SMA, aku memutuskan untuk mengikuti lomba menulis cerpen tingkat nasional...</p><p class=mt-4>Beberapa minggu kemudian, aku mendapatkan email dari panitia lomba. Aku tidak menyangka, aku berhasil menjadi salah satu finalis...</p>"},
-                   {"title": "Cerita 2: Imbalan", "image": "img/writings/imbalan.jpg", "content": "<p>Angin semilir menyapaku, menemaniku dalam keheningan malam yang sunyi...</p><p class=mt-4>“Apa yang kau cari, anak muda?” Suara serak seorang kakek tua membuyarkan lamunanku...</p><p class=mt-4>“Aku mencari imbalan, Kek. Imbalan atas semua kerja keras dan pengorbananku selama ini.”</p><p class=mt-4>Kakek itu tersenyum, “Imbalan tidak selalu berupa materi, anak muda. Terkadang, imbalan terbaik adalah kedamaian hati dan kebahagiaan yang tidak bisa dibeli dengan uang.”</p>"},
-                   {"title": "Cerita 3: Dermaga", "image": "img/writings/dermaga.jpg", "content": "<p>Aku berdiri di ujung dermaga,</p><p class=mt-4>Menatap cakrawala yang memisahkan lautan dan langit.</p><p class=mt-4>Kapal-kapal berlabuh, melepas lelah setelah berlayar jauh.</p><p class=mt-4>Sama sepertiku, yang sedang mencari tempat untuk bersandar.</p>"},
-                   {"title": "Cerita 4: Sisi-Sisi", "image": "img/writings/sisi-sisi.jpg", "content": "<p>Sisi kiri dan kanan saling beradu argumen, memperebutkan kebenaran yang absurd. Aku di tengah, menjadi wasit yang tak berdaya. Sisi kiri berkata, “Dunia ini kejam, kau harus lebih kejam untuk bertahan.” Sisi kanan membantah, “Dunia ini indah, kau hanya perlu membuka mata hatimu.” Aku terdiam, bingung. Keduanya benar, tapi keduanya juga salah. Kebenaran tidak pernah sesederhana itu, bukan?</p>"},
-                   {"title": "Cerita 5: Lari dalam Diam", "image": "img/writings/lari-dalam-diam.jpg", "content": "<p>Aku berlari, tapi tidak ada suara langkah kaki. Aku berteriak, tapi tidak ada suara yang keluar. Aku terjebak dalam sebuah dimensi hening, sebuah perlombaan tanpa garis finis. Keringat membasahi tubuhku, nafasku tersengal, tapi semua sia-sia. Aku hanya berlari dalam diam, mengejar sesuatu yang bahkan aku sendiri tidak tahu apa.</p>"},
-                   {"title": "Cerita 6: Neo-Logis", "image": "img/writings/neo-logis.jpg", "content": "<p>Logika baru telah lahir, sebuah logika yang tidak lagi terikat oleh aturan-aturan lama. Logika yang mengatakan bahwa satu tambah satu tidak selalu dua, bahwa hitam tidak selalu berlawanan dengan putih. Logika ini lahir dari kekacauan, dari ketidakpastian, dari keberanian untuk mempertanyakan segalanya. Mereka menyebutnya gila, aku menyebutnya evolusi.</p>"},
-                   {"title": "Cerita 7: Mata Uang Kutukan", "image": "img/writings/mata-uang-kutukan.jpg", "content": "<p>Setiap keping kebahagiaan yang kudapat, harus kubayar dengan keping kesedihan. Itulah mata uang di duniaku, sebuah kutukan yang berbalut kebahagiaan. Aku tertawa hari ini, tahu bahwa besok aku akan menangis. Aku mencintai hari ini, tahu bahwa besok aku akan kehilangan. Tapi aku terus bertransaksi, karena bahkan kebahagiaan sesaat pun lebih baik daripada kehampaan abadi.</p>"},
-                   {"title": "Cerita 8: Penjara Nalar", "image": "img/writings/penjara-nalar.jpg", "content": "<p>Pikiranku adalah sebuah penjara, dan nalarku adalah sipirnya. Setiap kali imajinasiku mencoba terbang bebas, nalarku dengan sigap menariknya kembali. “Itu tidak mungkin,” katanya. “Itu tidak logis,” bisiknya. Aku terpenjara dalam batas-batas yang kubuat sendiri, merindukan kebebasan untuk menjadi tidak masuk akal.</p>"},
-                   {"title": "Cerita 9: Prima Supremasi", "image": "img/writings/prima-supremasi.jpg", "content": "<p>Kekuasaan tertinggi adalah ilusi, sebuah panggung megah yang dibangun di atas kerapuhan. Sang raja duduk di singgasananya, merasa tak terkalahkan, padahal ia hanyalah boneka yang dikendalikan oleh tali-tali tak kasat mata: opini publik, pengkhianatan dewan, dan takdir yang tak bisa ia tawar. Supremasinya hanyalah prima donna dalam sebuah opera tragedi.</p>"},
-                   {"title": "Cerita 10: Sains Anarkis", "image": "img/writings/sains-anarkis.jpg", "content": "<p>Ilmu pengetahuan tanpa etika adalah anarki. Kami membedah atom, bukan untuk mencari pengetahuan, tapi untuk menciptakan kehancuran. Kami merekayasa genetika, bukan untuk menyembuhkan penyakit, tapi untuk menciptakan monster. Di laboratorium kami, tidak ada hukum, tidak ada Tuhan, hanya ada rasa ingin tahu yang buas dan tak terbatas. Kami adalah ilmuwan, dan kami adalah anarkis.</p>"}
-                ]'>
-           
+                <div data-aos="fade-up" data-aos-delay="200" class="project-card" data-id="anarkisme-nihilisme-bias">
                <img src="img/writings/sains-anarkis.jpg" alt="Gambar Kumpulan Cerita" class="card-image">
                <div class="card-content">
                    <h3 class="text-2xl font-bold text-white mb-3" data-key="nihilist_title">Anarkisme, Nihilisme Bias</h3>
@@ -559,8 +531,8 @@
         </div>
     </section>
 
-    <section id="cv" class="py-20 px-4 bg-gray-900"> <div class="container text-center">
-        <h2 class="text-4xl font-bold text-white mb-8" data-key="cv_title">Curriculum Vitae</h2>
+    <section id="cv" data-title="Curriculum Vitae - Portofolio Julian" class="py-20 px-4 bg-gray-900"> <div class="container text-center">
+        <h2 data-aos="fade-down" class="text-4xl font-bold text-white mb-8" data-key="cv_title">Curriculum Vitae</h2>
         <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto" data-key="cv_description">
             Lihat atau unduh CV lengkap saya dalam format PDF untuk informasi lebih rinci mengenai pengalaman dan kualifikasi saya.
         </p>
@@ -573,9 +545,9 @@
     </div>
 </section>
 
-    <section id="contact" class="py-20 px-4 bg-gray-800">
+    <section id="contact" data-title="Kontak - Portofolio Julian" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
-            <h2 class="text-4xl font-bold text-white mb-8" data-key="contact_title">Hubungi Saya</h2>
+            <h2 data-aos="fade-up" class="text-4xl font-bold text-white mb-8" data-key="contact_title">Hubungi Saya</h2>
             <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto" data-key="contact_description">
                 Tertarik untuk berkolaborasi atau hanya ingin menyapa? Jangan ragu untuk menghubungi saya melalui saluran berikut:
             </p>
@@ -639,5 +611,6 @@
         </div>
     </div>
     <script src="js/main.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     </body>
 </html>
