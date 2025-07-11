@@ -108,39 +108,36 @@
             margin-bottom: 1rem;
         }
 
-        .tab-button {
-            display: block;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
-            background-color: #2d3748; /* Warna abu-abu gelap */
-            color: #cbd5e0; /* Warna teks abu-abu terang */
-            border-radius: 0.375rem; /* rounded-md */
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .tab-button:hover {
-            background-color: #4a5568; /* Warna abu-abu sedikit lebih terang saat hover */
-            color: #ffffff;
-        }
-
-        .tab-button.active {
-            background-color: #4299e1; /* Warna biru untuk tab aktif */
-            color: #ffffff;
-            font-weight: 600; /* semi-bold */
-            border-color: #63b3ed;
-        }
-
-        .tab-content {
-            display: none; /* Sembunyikan semua konten tab secara default */
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block; /* Tampilkan hanya konten tab yang aktif */
-        }
+/* Pastikan gaya ini ada di CSS Anda */
+.tab-button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    background-color: #4a5568;
+    color: #cbd5e0;
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.tab-button:hover {
+    background-color: #2d3748;
+    color: #ffffff;
+}
+.tab-button.active {
+    background-color: #4299e1;
+    color: #ffffff;
+    font-weight: 600;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
 
         /* Animasi fade-in sederhana */
         @keyframes fadeIn {
@@ -195,11 +192,44 @@
             border-color: #63b3ed;
             font-weight: 600;
         }
+
+        .mobile-dropdown {
+            display: none; /* Sembunyikan di desktop secara default */
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: #4a5568; /* Warna abu-abu gelap */
+            color: #ffffff;
+            border: 1px solid #718096;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 1rem;
+            cursor: pointer;
+        }
         /* --- Gaya untuk Layar Mobile (Lebar Maksimum 768px) --- */
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem; /* Kurangi padding container */
     }
+
+    .desktop-tabs {
+        display: none;
+    }
+    .mobile-dropdown {
+        display: block;
+    }
+    .modal-content {
+        /* Beri lebih banyak ruang di mobile */
+        max-width: 95%; 
+    }
+
+    /* Sembunyikan dropdown di desktop dan tablet */
+@media (min-width: 768px) {
+    .mobile-dropdown {
+        display: none;
+    }
+    .desktop-tabs {
+        display: block; /* Pastikan daftar tombol terlihat di desktop */
+    }
+}
 
     /* Header dan Navigasi */
     header nav {
@@ -358,4 +388,200 @@
     #skills .lg\:w-3\/5 {
         width: 55%;
     }
+}
+
+/* ================================================= */
+/* === GAYA KARTU TULISAN (GAYA PROYEK) === */
+/* ================================================= */
+
+/* Memberi gaya pada .project-card agar fleksibel */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Gambar di dalam kartu */
+.card-image {
+    width: 100%;
+    height: 300px; /* Tinggi gambar yang seragam */
+    object-fit: cover;
+    border-radius: 0.5rem 0.5rem 0 0; /* Sudut melengkung hanya di atas */
+}
+
+/* Konten di dalam kartu (teks, tag, tombol) */
+.card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Membuat konten ini mengisi sisa ruang kartu */
+}
+
+.card-content p {
+    flex-grow: 1; /* Membuat paragraf mengisi ruang agar tombol rata bawah */
+}
+
+/* Tombol "Baca Selengkapnya" */
+.writing-modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #63b3ed; /* Warna biru cerah */
+    font-weight: 600;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-top: auto; /* Mendorong tombol ke bagian bawah */
+    align-self: flex-start; /* Tombol rata kiri */
+}
+
+.writing-modal-btn:hover {
+    color: #90cdf4; /* Warna hover */
+}
+
+/* Gaya untuk tag/kategori tulisan */
+[class^="tag-"] {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    color: #ffffff;
+}
+.tag-prosa { background-color: #805ad5; }
+.tag-cerpen { background-color: #3182ce; }
+.tag-teknologi { background-color: #38a169; }
+.tag-karir { background-color: #d69e2e; }
+
+/* Pastikan gaya untuk gambar di dalam modal tetap ada */
+.writing-modal-hero-image {
+    width: 50%;
+    max-height: 500px; /* Anda bisa sesuaikan ukurannya */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- GAYA UNTUK NAVIGASI HEADER RESPONSIVE --- */
+
+/* Gaya dasar untuk navigasi utama */
+.main-nav {
+    /* Sembunyikan di mobile secara default */
+    display: none; 
+}
+
+/* Tampilan menu di Desktop (layar medium ke atas) */
+@media (min-width: 768px) {
+    .main-nav {
+        display: flex; /* Tampilkan sebagai flexbox horizontal */
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem; /* Jarak antar item, menggantikan space-x-6 */
+    }
+}
+
+/* Tampilan menu di Mobile (saat aktif/terbuka) */
+.main-nav.active {
+    display: block; /* Tampilkan sebagai blok saat aktif */
+    position: absolute;
+    top: 100%; /* Muncul tepat di bawah header */
+    left: 0;
+    right: 0;
+    background-color: #1f2937; /* bg-gray-800, sedikit lebih terang dari header */
+    padding: 1rem;
+    border-top: 1px solid #374151; /* Garis pemisah */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Gaya untuk setiap item link di navigasi */
+.nav-link {
+    color: #cbd5e0; /* text-gray-400 */
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem; /* rounded-md */
+    transition: all 0.3s ease;
+    display: block; /* Agar padding bekerja dengan baik di mobile */
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background-color: #4a5568; /* bg-gray-600 */
+}
+
+/* Gaya khusus untuk link yang sedang aktif */
+.nav-link.nav-active {
+    color: white;
+    background-color: #3B82F6; /* Warna biru */
+    font-weight: 600;
+}
+
+/* --- GAYA UNTUK DROPDOWN NAVIGASI DESKTOP --- */
+
+/* Hanya terapkan gaya dropdown di layar desktop (lebar 768px ke atas) */
+@media (min-width: 768px) {
+    /* Kontainer untuk item dropdown */
+    .nav-item-dropdown {
+        position: relative; /* Diperlukan agar dropdown muncul di posisi yang benar */
+    }
+
+    /* Menu dropdown itu sendiri */
+    .dropdown-menu {
+        display: none; /* Sembunyikan secara default */
+        position: absolute;
+        top: 100%; /* Muncul tepat di bawah item "Karya" */
+        left: 0;
+        background-color: #1f2937; /* Warna latar dropdown */
+        border-radius: 0.5rem; /* rounded-lg */
+        padding: 0.5rem;
+        min-width: 200px; /* Lebar minimum dropdown */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        z-index: 50;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Tampilkan dropdown saat parent di-hover */
+    .nav-item-dropdown:hover .dropdown-menu {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Gaya untuk setiap link di dalam dropdown */
+    .dropdown-link {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: #cbd5e0; /* Warna teks */
+        border-radius: 0.375rem; /* rounded-md */
+        transition: all 0.2s ease;
+        white-space: nowrap; /* Mencegah teks turun baris */
+    }
+
+    .dropdown-link:hover {
+        background-color: #4a5568; /* Warna latar saat hover */
+        color: #ffffff;
+    }
+}
+
+/* --- GAYA UNTUK TOMBOL BAHASA --- */
+.lang-btn {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem; /* rounded-md */
+    font-weight: 600; /* semi-bold */
+    color: #a0aec0; /* gray-500 */
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+    color: #ffffff;
+    background-color: #4a5568; /* gray-600 */
+}
+
+.lang-btn.active {
+    color: #ffffff;
+    background-color: #4299e1; /* blue-500 */
 }
