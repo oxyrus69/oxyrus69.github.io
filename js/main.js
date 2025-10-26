@@ -93,6 +93,185 @@ if (generateBtn) {
     });
 }
 
+// --- LOGIKA GENERATOR KUTIPAN ---
+const newQuoteBtn = document.getElementById('newQuoteBtn');
+const explainQuoteBtn = document.getElementById('explainQuoteBtn'); // Tombol baru
+const quoteTextEl = document.getElementById('quoteText');
+const quoteAuthorEl = document.getElementById('quoteAuthor');
+
+// Elemen Modal Baru
+const philosophyModal = document.getElementById('philosophyModal');
+const closePhilosophyModalBtn = document.getElementById('closePhilosophyModalBtn');
+const modalQuoteText = document.getElementById('modalQuoteText');
+const modalQuoteAuthor = document.getElementById('modalQuoteAuthor');
+const modalQuoteExplanation = document.getElementById('modalQuoteExplanation');
+
+// Variabel untuk menyimpan data kutipan saat ini
+let currentQuote = "";
+let currentAuthor = "";
+let currentExplanation = "";
+
+// 1. Daftar kutipan dengan PENJELASAN (Versi Diperbanyak)
+const myQuotes = [
+    // --- Friedrich Nietzsche ---
+    {
+        quote: "Dia yang memiliki 'mengapa' untuk hidup dapat menanggung hampir semua 'bagaimana'.",
+        author: "— Friedrich Nietzsche",
+        explanation: "Nietzsche berpendapat bahwa jika seseorang memiliki tujuan hidup yang kuat ('mengapa'), mereka dapat mengatasi hampir semua penderitaan atau kesulitan ('bagaimana') yang mereka hadapi."
+    },
+    {
+        quote: "Apa yang tidak membunuh kita, membuat kita lebih kuat.",
+        author: "— Friedrich Nietzsche",
+        explanation: "Ini adalah konsep 'kehendak untuk berkuasa' (Will to Power). Nietzsche percaya bahwa mengatasi kesulitan tidak hanya mengembalikan kita ke keadaan semula, tetapi juga meningkatkan kekuatan dan ketahanan kita."
+    },
+    {
+        quote: "Untuk hidup adalah untuk menderita, untuk bertahan hidup adalah menemukan makna dalam penderitaan itu.",
+        author: "— Friedrich Nietzsche",
+        explanation: "Mirip dengan 'mengapa' dan 'bagaimana', Nietzsche melihat penderitaan sebagai bagian tak terpisahkan dari eksistensi. Makna ditemukan bukan dengan menghindari penderitaan, tetapi dengan merangkulnya sebagai bagian dari pertumbuhan."
+    },
+    {
+        quote: "Tuhan sudah mati. Tuhan tetap mati. Dan kita telah membunuhnya.",
+        author: "— Friedrich Nietzsche",
+        explanation: "Ini bukan pernyataan harfiah, melainkan metafora budaya. Maksudnya, ide tentang Tuhan sebagai sumber moralitas dan makna absolut telah mati di era Pencerahan. Manusia kini dibiarkan kosong, harus menciptakan nilainya sendiri."
+    },
+
+    // --- Jean-Paul Sartre ---
+    {
+        quote: "Manusia dikutuk untuk bebas.",
+        author: "— Jean-Paul Sartre",
+        explanation: "Sartre menyatakan bahwa manusia tidak memiliki esensi (tujuan) yang telah ditentukan. Kita 'dikutuk' karena kita dipaksa untuk terus-menerus membuat pilihan yang mendefinisikan siapa diri kita, tanpa ada pedoman ilahi."
+    },
+    {
+        quote: "Neraka adalah orang lain.",
+        author: "— Jean-Paul Sartre",
+        explanation: "Dari drama 'No Exit'. Maksudnya adalah bahwa kita seringkali menyadari diri kita melalui pandangan dan penilaian orang lain. Tatapan mereka 'membekukan' kita, membuat kita menjadi objek dan merampas kebebasan kita."
+    },
+    {
+        quote: "Eksistensi mendahului esensi.",
+        author: "— Jean-Paul Sartre",
+        explanation: "Ini adalah inti dari eksistensialisme. Berbeda dengan gunting (yang esensinya/tujuannya dibuat dulu baru dia ada), manusia 'ada' (eksis) terlebih dahulu di dunia, baru kemudian dia mendefinisikan esensi/makna dirinya sendiri melalui tindakannya."
+    },
+
+    // --- Arthur Schopenhauer ---
+    {
+        quote: "Hidup berayun seperti pendulum, maju mundur di antara rasa sakit dan kebosanan.",
+        author: "— Arthur Schopenhauer",
+        explanation: "Bagi Schopenhauer, hidup pada dasarnya adalah penderitaan. Saat kita menginginkan sesuatu, kita merasa sakit (kekurangan). Begitu kita mendapatkannya, kita langsung merasa bosan. Inilah siklus abadi kehidupan."
+    },
+    {
+        quote: "Manusia bisa melakukan apa yang ia inginkan, tapi ia tidak bisa menginginkan apa yang ia inginkan.",
+        author: "— Arthur Schopenhauer",
+        explanation: "Schopenhauer berargumen bahwa kita memiliki 'kehendak bebas' untuk bertindak berdasarkan keinginan kita, tetapi kita tidak bebas untuk *memilih* apa yang kita inginkan. Keinginan itu sendiri berasal dari 'Kehendak' (Will) buta di luar kendali kita."
+    },
+    {
+        quote: "Kasih sayang adalah dasar dari moralitas.",
+        author: "— Arthur Schopenhauer",
+        explanation: "Meskipun seorang pesimis, Schopenhauer percaya bahwa moralitas muncul dari kemampuan merasakan penderitaan orang lain (welas asih) seolah-olah itu adalah penderitaan kita sendiri, menyadari bahwa kita semua adalah bagian dari 'Kehendak' universal yang menderita."
+    },
+    
+    // --- Franz Kafka ---
+    {
+        quote: "Makna hidup adalah bahwa ia akan berhenti.",
+        author: "— Franz Kafka",
+        explanation: "Kutipan ini menyoroti absurditas. Kafka sering melihat hidup sebagai labirin birokrasi yang tidak masuk akal. Fakta bahwa hidup akan berakhir adalah satu-satunya kepastian yang memberinya 'makna' ironis."
+    },
+    {
+        quote: "Sebuah sangkar pergi mencari seekor burung.",
+        author: "— Franz Kafka",
+        explanation: "Kutipan ini adalah contoh khas 'Kafkaesque'. Ini membalikkan logika normal (burung mencari sangkar) untuk menciptakan perasaan absurditas, jebakan, dan pencarian makna yang sia-sia di dunia yang tidak logis."
+    },
+    {
+        quote: "Mulai sekarang, Anda adalah tahanan saya.",
+        author: "— Franz Kafka, 'The Trial'",
+        explanation: "Dari 'The Trial', di mana tokoh utama ditangkap tanpa mengetahui kejahatannya. Ini melambangkan rasa bersalah eksistensial, absurditas hukum dan birokrasi, dan perasaan terjebak oleh kekuatan yang tidak terlihat dan tidak bisa dipahami."
+    },
+
+    // --- Albert Camus ---
+    {
+        quote: "Kita harus membayangkan Sisifus bahagia.",
+        author: "— Albert Camus",
+        explanation: "Dalam 'Mitos Sisifus', Camus menggunakan Sisifus (yang dikutuk mendorong batu ke atas bukit selamanya) sebagai pahlawan absurd. Dengan menerima nasibnya yang sia-sia dan tetap melakukannya, Sisifus menemukan kebebasan dan kebahagiaannya sendiri."
+    },
+    {
+        quote: "Satu-satunya masalah filosofis yang benar-benar serius adalah bunuh diri.",
+        author: "— Albert Camus",
+        explanation: "Ini adalah kalimat pembuka 'Mitos Sisifus'. Camus berpendapat bahwa sebelum menanyakan hal lain, kita harus menjawab pertanyaan terbesar: Mengingat hidup ini absurd (tidak punya makna inheren), mengapa kita tidak bunuh diri saja? Jawabannya adalah 'pemberontakan' dan 'merangkul absurditas' itu sendiri."
+    },
+    {
+        quote: "Di tengah musim dingin, aku menemukan di dalam diriku, ada musim panas yang tak terkalahkan.",
+        author: "— Albert Camus",
+        explanation: "Berbeda dengan nihilisme murni, Camus adalah seorang 'Absurdis' yang humanis. Kutipan ini menunjukkan bahwa meskipun di tengah penderitaan dan absurditas dunia (musim dingin), ada ketahanan, kegembiraan, dan kekuatan yang tak tergoyahkan di dalam diri manusia."
+    },
+
+    // --- Fyodor Dostoevsky ---
+    {
+        quote: "Jika Tuhan tidak ada, maka semuanya diperbolehkan.",
+        author: "— Fyodor Dostoevsky",
+        explanation: "Kutipan (dari 'The Brothers Karamazov') ini adalah inti dari krisis nihilisme. Dostoevsky mempertanyakan, jika tidak ada Tuhan atau moralitas absolut, apa yang menghentikan manusia dari melakukan tindakan apa pun, seburuk apa pun?"
+    },
+    {
+        quote: "Mengambil langkah baru, mengucapkan kata baru, adalah apa yang paling ditakuti orang.",
+        author: "— Fyodor Dostoevsky",
+        explanation: "Dari 'Crime and Punishment'. Ini menyoroti ketakutan eksistensial akan kebebasan dan tanggung jawab. Melanggar norma dan menciptakan jalan sendiri (mengambil 'langkah baru') adalah beban kebebasan yang menakutkan bagi kebanyakan orang."
+    }
+];
+
+// 2. Fungsi untuk menampilkan kutipan baru
+function getNewQuote() {
+    const randomIndex = Math.floor(Math.random() * myQuotes.length);
+    const randomQuote = myQuotes[randomIndex];
+
+    // 3. Tampilkan ke HTML utama
+    quoteTextEl.textContent = `"${randomQuote.quote}"`;
+    quoteAuthorEl.textContent = randomQuote.author; 
+
+    // 4. SIMPAN data kutipan saat ini ke variabel
+    currentQuote = `"${randomQuote.quote}"`;
+    currentAuthor = randomQuote.author;
+    currentExplanation = randomQuote.explanation;
+
+    // 5. Ubah gaya placeholder dan tampilkan tombol "Jelaskan"
+    quoteTextEl.classList.remove('text-gray-400');
+    quoteTextEl.classList.add('text-white');
+    quoteTextEl.classList.remove('italic');
+    explainQuoteBtn.classList.remove('hidden'); // Tampilkan tombol!
+}
+
+// 6. Fungsi untuk Modal
+function openPhilosophyModal() {
+    // Isi modal dengan data yang sudah disimpan
+    modalQuoteText.textContent = currentQuote;
+    modalQuoteAuthor.textContent = currentAuthor;
+    modalQuoteExplanation.textContent = currentExplanation;
+    
+    // Tampilkan modal
+    philosophyModal.classList.add('active');
+}
+
+function closePhilosophyModal() {
+    philosophyModal.classList.remove('active');
+}
+
+// 7. Tambahkan event listener ke tombol
+if (newQuoteBtn) {
+    newQuoteBtn.addEventListener('click', getNewQuote);
+}
+if (explainQuoteBtn) {
+    explainQuoteBtn.addEventListener('click', openPhilosophyModal);
+}
+if (closePhilosophyModalBtn) {
+    closePhilosophyModalBtn.addEventListener('click', closePhilosophyModal);
+    philosophyModal.addEventListener('click', (e) => {
+        if (e.target === philosophyModal) {
+            closePhilosophyModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && philosophyModal.classList.contains('active')) {
+            closePhilosophyModal();
+        }
+    });
+}
 
            // ===============================================
     // ====== INISIALISASI AOS (Animate On Scroll) ======
@@ -248,7 +427,7 @@ const portfolioData = {
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
     // --- LOGIKA SMOOTH SCROLL ---
-    document.querySelectorAll('header nav ul li a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('header nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
