@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio Julian</title>
     <link rel="icon" href="img/logo/profil.png" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -51,7 +52,7 @@
                     <li><a href="#writings" class="dropdown-link" data-key="nav_writings">Antologi</a></li>
                 </ul>
             </li>
-            <li><a href="#cv" class="nav-link" data-key="nav_cv">Curriculum Vitae</a></li>
+            <li><a href="#cover-letter" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md">Surat Lamaran</a></li>
             <li><a href="#contact" class="nav-link" data-key="nav_contact">Kontak</a></li>
         </ul>
     </nav>
@@ -542,19 +543,33 @@
         </div>
     </section>
 
-    <section id="cv" data-title="Curriculum Vitae - Portofolio Julian" class="py-20 px-4 bg-gray-900"> <div class="container text-center">
-        <h2 data-aos="fade-down" class="text-4xl font-bold text-white mb-8" data-key="cv_title">Curriculum Vitae</h2>
-        <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto" data-key="cv_description">
-            Lihat atau unduh CV lengkap saya dalam format PDF untuk informasi lebih rinci mengenai pengalaman dan kualifikasi saya.
-        </p>
-        
-        <a href="assets/Cv_Julian.pdf" target="_blank" 
-           class="inline-flex items-center space-x-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
-            <i data-lucide="download" class="w-5 h-5 mr-2"></i>
-            <span data-key="cv_button">Unduh CV (PDF)</span>
-        </a>
-    </div>
-</section>
+    <section id="cover-letter" data-title="Generator Surat Lamaran" class="py-20 px-4 bg-gray-900">
+        <div class="container text-center">
+            <h2 data-aos="fade-up" class="text-4xl font-bold text-white mb-8">Generator Surat Lamaran</h2>
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Masukkan nama perusahaan dan posisi yang ingin dilamar untuk membuat surat lamaran singkat secara otomatis.
+            </p>
+            
+            <div class="max-w-xl mx-auto space-y-6">
+                <div>
+                    <label for="companyName" class="block text-left text-gray-300 mb-2 font-semibold">Nama Perusahaan:</label>
+                    <input type="text" id="companyName" placeholder="Contoh: PT. Teknologi Maju" class="w-full bg-gray-700 border border-gray-600 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                </div>
+                <div>
+                    <label for="position" class="block text-left text-gray-300 mb-2 font-semibold">Posisi yang Dilamar:</label>
+                    <input type="text" id="position" placeholder="Contoh: Junior Web Developer" class="w-full bg-gray-700 border border-gray-600 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                </div>
+                <button id="generateLetterBtn" class="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
+                    <i data-lucide="file-text" class="w-5 h-5 mr-2"></i>
+                    <span>Buat Surat</span>
+                </button>
+            </div>
+    
+            <div id="letterResult" class="hidden relative max-w-4xl mx-auto bg-gray-900 border border-gray-700 rounded-lg p-8 md:p-12 mt-12 text-left leading-relaxed text-gray-300">
+                <p class="text-center text-gray-500">Hasil surat lamaran Anda akan muncul di sini...</p>
+            </div>
+        </div>
+    </section>
 
     <section id="contact" data-title="Kontak - Portofolio Julian" class="py-20 px-4 bg-gray-800">
         <div class="container text-center">
