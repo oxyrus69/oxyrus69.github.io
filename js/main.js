@@ -8,103 +8,11 @@ const companyNameInput = document.getElementById('companyName');
 const positionInput = document.getElementById('position');
 
 // BARU: Tambahkan event listener untuk tombol close
-// Kita tambahkan di sini (di luar tombol generate) menggunakan event delegation
 if (letterResultEl) {
-
-    // --- FUNGSI HELPER BARU ---
-    // Fungsi ini akan memaksa gaya (inline style) untuk cetak
-    // Ini jauh lebih kuat daripada menambahkan kelas CSS
-    function togglePrintStyles(element, mode) {
-        const isPrintMode = (mode === 'on');
-        
-        // Tentukan warna berdasarkan mode
-        const bgColor = isPrintMode ? '#ffffff' : null;
-        const textColor = isPrintMode ? '#000000' : null;
-        const linkColor = isPrintMode ? '#0000EE' : null; // Biru tua standar untuk cetak
-
-        // Atur background dan warna teks utama pada elemen pembungkus
-        element.style.backgroundColor = bgColor;
-        element.style.color = textColor;
-
-        // Dapatkan *semua* elemen teks di dalamnya
-        const allChildren = element.querySelectorAll('p, strong, td, li, h4, div, span');
-        allChildren.forEach(child => {
-            // Cek agar tidak mengubah gaya tombol di toolbar
-            if (!child.closest('#downloadLetterBtn') && !child.closest('#closeLetterResultBtn')) {
-                // Terapkan gaya teks hitam
-                child.style.color = textColor;
-            }
-        });
-
-        // Tangani link secara spesifik (yang tadinya .text-blue-400)
-        const links = element.querySelectorAll('.text-blue-400');
-        links.forEach(link => {
-            link.style.color = linkColor;
-        });
-        
-        // Tangani nama Anda secara spesifik (yang tadinya .font-semibold.text-white)
-        const myNameEl = element.querySelector('.font-semibold.text-white');
-        if (myNameEl) {
-            myNameEl.style.color = textColor;
-        }
-    }
-    // --- AKHIR FUNGSI HELPER ---
-
-    // Tambahkan event listener utama
+    // Event listener untuk Tombol Close
     letterResultEl.addEventListener('click', function(e) {
-        
-        // Logika untuk Tombol Close
         if (e.target.closest('#closeLetterResultBtn')) {
-            letterResultEl.classList.add('hidden'); // Sembunyikan area hasil
-        } 
-        
-        // Logika untuk Tombol Download PDF
-        else if (e.target.closest('#downloadLetterBtn')) {
-            
-            // 1. Dapatkan elemen dan data
-            const letterContent = document.getElementById('printableLetter');
-            const company = companyNameInput.value || 'Perusahaan';
-            const pos = positionInput.value || 'Posisi';
-            const filename = `Surat Lamaran - Julian - ${pos} - ${company}.pdf`;
-            
-            // 2. Siapkan opsi
-            const options = {
-                margin:       [0.75, 0.5, 0.75, 0.5], 
-                filename:     filename,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { 
-                    scale: 2, 
-                    useCORS: true, 
-                    logging: false, 
-                    backgroundColor: '#ffffff' // Pastikan background canvas putih
-                },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-
-            // 3. Beri feedback ke pengguna
-            const downloadBtn = e.target.closest('#downloadLetterBtn');
-            downloadBtn.innerHTML = 'Memproses...';
-            downloadBtn.disabled = true;
-
-            // --- PERUBAHAN UTAMA: PAKSA GAYA SEBELUM CETAK ---
-            
-            // 4. Terapkan gaya cetak (Mode Terang) secara manual
-            togglePrintStyles(letterContent, 'on');
-
-            // 5. Gunakan setTimeout untuk memberi browser waktu memproses gaya inline
-            // Ini adalah kunci untuk memperbaiki "race condition"
-            setTimeout(() => {
-                // 6. Jalankan fungsi PDF
-                html2pdf().set(options).from(letterContent).save().then(() => {
-                    // 7. Kembalikan gaya ke Mode Gelap SETELAH selesai
-                    togglePrintStyles(letterContent, 'off');
-
-                    // 8. Kembalikan tombol seperti semula
-                    downloadBtn.innerHTML = `<i data-lucide="download" class="w-4 h-4"></i><span>Unduh PDF</span>`;
-                    downloadBtn.disabled = false;
-                    lucide.createIcons(); // Render ulang ikon download
-                });
-            }, 100); // Penundaan 100 milidetik
+            letterResultEl.classList.add('hidden');
         }
     });
 }
@@ -114,96 +22,73 @@ if (generateBtn) {
         const companyName = companyNameInput.value;
         const position = positionInput.value;
 
-        // 1. Validasi Input
+        // 1. Validasi
         if (companyName.trim() === '' || position.trim() === '') {
             alert('Mohon isi nama perusahaan dan posisi yang dilamar.');
             return;
         }
         
-        // 2. Buat format tanggal
+        // 2. Buat data tanggal
         const today = new Date();
-        const months = [
-            "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-        ];
-        const day = today.getDate();
-        const monthName = months[today.getMonth()];
-        const year = today.getFullYear();
-        const formattedDate = `Garut, ${day} ${monthName} ${year}`; 
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const formattedDate = `Garut, ${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`; 
 
-        // 3. Data Diri (Isi placeholder ini)
-        const myName = "Julian";
-        const myAddress = "[MASUKKAN ALAMAT LENGKAP ANDA]"; // <--- ISI INI
-        const myPhone = "[MASUKKAN NO. HP ANDA]"; // <--- ISI INI
-        const myEmail = "endriojn@gmail.com";
+        // 3. Data diri (PASTIKAN INI DIISI)
+        const myName = "Tri Endriardi Juliansyah";
+        const myAddress = "Garut Kota"; // <--- ISI INI
+        const myPhone = "0813-9993-2152"; // <--- ISI INI
+        const myEmail = "roomofstories@gmail.com";
 
-        // 4. Buat Template Surat dengan Toolbar dan Area Cetak
+        // 4. Buat Template Surat (Versi Sederhana tanpa download)
+        // Kita tidak lagi butuh 'printableLetter'
         const letterTemplate = `
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-700">
-                <div>
-                    <button id="downloadLetterBtn" class="inline-flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-full shadow-lg transform hover:scale-105 transition duration-300 text-sm">
-                        <i data-lucide="download" class="w-4 h-4"></i>
-                        <span>Unduh PDF</span>
-                    </button>
+            <button id="closeLetterResultBtn" class="absolute top-4 right-6 text-gray-400 hover:text-white transition-colors text-3xl leading-none" title="Tutup">&times;</button>
+            
+            <div class="flex justify-between items-start mb-6">
+                <div class="text-left">
+                    <p><strong>Hal: Lamaran Pekerjaan (${position})</strong></p>
+                    <p><strong>Lampiran: 4 (Empat) Berkas</strong></p>
                 </div>
-                <button id="closeLetterResultBtn" class="text-gray-400 hover:text-white transition-colors text-3xl leading-none" title="Tutup">&times;</button>
+                <p class="text-right">${formattedDate}</p>
             </div>
 
-            <div id="printableLetter" class="p-2">
+            <p class="mb-4">Yth. Bapak/Ibu Pimpinan HRD<br>
+            <strong>${companyName}</strong><br>
+            di Tempat</p>
             
-                <div class="flex justify-between items-start mb-6">
-                    <div class="text-left">
-                        <p><strong>Hal: Lamaran Pekerjaan (${position})</strong></p>
-                        <p><strong>Lampiran: 4 (Empat) Berkas</strong></p>
-                    </div>
-                    <p class="text-right">${formattedDate}</p>
-                </div>
-
-                <p class="mb-4">Yth. Bapak/Ibu Pimpinan HRD<br>
-                <strong>${companyName}</strong><br>
-                di Tempat</p>
-                
-                <p class="mb-4">Dengan hormat,</p>
-                
-                <p class="mb-4 text-justify">Yang bertanda tangan di bawah ini:</p>
-                
-                <table class="mb-4 ml-4" style="border-collapse: collapse;">
-                    <tbody>
-                        <tr><td style="padding-right: 16px; vertical-align: top;">Nama</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;"><strong>${myName}</strong></td></tr>
-                        <tr><td style="padding-right: 16px; vertical-align: top;">Alamat</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;">${myAddress}</td></tr>
-                        <tr><td style="padding-right: 16px; vertical-align: top;">Email</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;">${myEmail}</td></tr>
-                        <tr><td style="padding-right: 16px; vertical-align: top;">No. Telepon</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;">${myPhone}</td></tr>
-                    </tbody>
-                </table>
-
-                <p class="mb-4 text-justify">Dengan ini saya bermaksud mengajukan lamaran pekerjaan untuk dapat bergabung di <strong>${companyName}</strong> guna mengisi posisi sebagai <strong>${position}</strong>.</p>
-                <p class="mb-4 text-justify">Saya memiliki keahlian dalam pengembangan web full-stack, khususnya menggunakan PHP, Laravel, CodeIgniter 4, dan MySQL. Saya mampu memecahkan masalah kompleks, mudah beradaptasi, dan memiliki semangat belajar yang tinggi. Saya yakin kualifikasi ini relevan dan dapat berkontribusi positif bagi perusahaan.</p>
-
-                <p class="mb-4 text-justify">Sebagai bahan pertimbangan lebih lanjut, bersama ini saya lampirkan kelengkapan data diri sebagai berikut:</p>
-                <ol class="list-decimal list-inside mb-4 ml-4">
-                    <li>Curriculum Vitae (CV)</li>
-                    <li>Fotokopi Ijazah Terakhir</li>
-                    <li>Fotokopi Transkrip Nilai</li>
-                    <li>Fotokopi KTP</li>
-                </ol>
-                
-                <p class="mb-4 text-justify">Besar harapan saya untuk dapat diberikan kesempatan mengikuti tahap seleksi selanjutnya dan menjelaskan kualifikasi saya secara lebih mendalam. Terima kasih atas waktu dan perhatian Bapak/Ibu.</p>
-                
-                <br>
-                <p>Hormat saya,</p>
-                <br><br>
-                <p class="font-semibold text-white">${myName}</p>
+            <p class="mb-4">Dengan hormat,</p>
+            <p class="mb-4 text-justify">Yang bertanda tangan di bawah ini:</p>
             
-            </div> `;
+            <table class="mb-4 ml-4" style="border-collapse: collapse;">
+                <tbody>
+                    <tr><td style="padding-right: 16px; vertical-align: top;">Nama</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;"><strong>${myName}</strong></td></tr>
+                    <tr><td style="padding-right: 16px; vertical-align: top;">Alamat</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;">${myAddress}</td></tr>
+                    <tr><td style="padding-right: 16px; vertical-align: top;">Email</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;">${myEmail}</td></tr>
+                    <tr><td style="padding-right: 16px; vertical-align: top;">No. Telepon</td><td style="vertical-align: top;">:</td><td style="padding-left: 8px; vertical-align: top;">${myPhone}</td></tr>
+                </tbody>
+            </table>
+
+            <p class="mb-4 text-justify">Dengan ini saya bermaksud mengajukan lamaran pekerjaan untuk dapat bergabung di <strong>${companyName}</strong> guna mengisi posisi sebagai <strong>${position}</strong>.</p>
+            <p class="mb-4 text-justify">Saya memiliki keahlian dalam pengembangan web full-stack, khususnya menggunakan PHP, Laravel, CodeIgniter 4, dan MySQL. Saya mampu memecahkan masalah kompleks, mudah beradaptasi, dan memiliki semangat belajar yang tinggi. Saya yakin kualifikasi ini relevan dan dapat berkontribusi positif bagi perusahaan.</p>
+            <p class="mb-4 text-justify">Sebagai bahan pertimbangan lebih lanjut, bersama ini saya lampirkan kelengkapan data diri sebagai berikut:</p>
+            <ol class="list-decimal list-inside mb-4 ml-4">
+                <li>Curriculum Vitae (CV)</li>
+                <li>Fotokopi Ijazah Terakhir</li>
+                <li>Fotokopi Transkrip Nilai</li>
+                <li>Fotokopi KTP</li>
+            </ol>
+            <p class="mb-4 text-justify">Besar harapan saya untuk dapat diberikan kesempatan mengikuti tahap seleksi selanjutnya dan menjelaskan kualifikasi saya secara lebih mendalam. Terima kasih atas waktu dan perhatian Bapak/Ibu.</p>
+            <br>
+            <p>Hormat saya,</p>
+            <br><br>
+            <p class="font-semibold text-white">${myName}</p>
+        `;
 
         // 5. Tampilkan Hasil
         letterResultEl.innerHTML = letterTemplate;
         letterResultEl.classList.remove('hidden');
-        
-        // Panggil Lucide untuk merender ikon "download" yang baru
-        lucide.createIcons();
 
-        // 6. (Opsional) Scroll ke hasil
+        // 6. Scroll ke hasil
         letterResultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
