@@ -41,7 +41,7 @@
             <li><a href="#skills" class="nav-link" data-key="nav_skills">Keahlian</a></li>
         
             <li class="nav-item-dropdown">
-                <a href="#" class="nav-link flex items-center gap-1">
+                <a href="#" class="nav-link">
                     <span data-key="nav_work">Karya</span>
                     <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </a>
@@ -51,15 +51,15 @@
                     <li><a href="#writings" class="dropdown-link" data-key="nav_writings">Antologi</a></li>
                 </ul>
             </li>
-            <li class="relative group">
-                <a href="#tools" class="text-gray-300 hover:text-white transition duration-300 p-2 rounded-md flex items-center">
+            <li class="nav-item-dropdown">
+                <a href="#" class="nav-link">
                     Tools
-                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </a>
                 
-                <ul class="absolute left-0 mt-1 w-48 bg-gray-800 border border-gray-700 rounded-md shadow-lg hidden group-hover:block z-50">
-                    <li><a href="#tool-cover-letter" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-300">Surat Lamaran</a></li>
-                    <li><a href="#tool-philosophy" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-300">Pojok Filsafat</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#tool-cover-letter" class="dropdown-link" data-key="nav_cover">Surat Lamaran</a></li>
+                    <li><a href="#tool-philosophy" class="dropdown-link" data-key="nav_quote">Pojok Filsafat</a></li>
                 </ul>
             </li>
             <li><a href="#contact" class="nav-link" data-key="nav_contact">Kontak</a></li>
@@ -546,20 +546,23 @@
                        <span data-key="read">Baca Kumpulan Cerita</span>
                    </button>
                </div>
-           </div>
-                
+           </div>        
             </div>
         </div>
     </section>
 
-    <section id="tools" class="py-20 px-4 bg-gray-900">
+    <section id="tools" data-aos="fade-up" data-title="Utility Tools" class="py-20 px-4 bg-gray-900">
         <div class="container text-center">
             <h2 class="text-4xl font-bold text-white mb-16">Utility Tools</h2>
             
             <div class="space-y-16">
                 
                 <div id="tool-cover-letter" class="max-w-4xl mx-auto bg-gray-800 border border-gray-700 rounded-lg p-8 md:p-12">
-                    <h3 class="text-3xl font-bold text-white mb-8">Generator Surat Lamaran</h3>
+                    <h3 data-aos="fade-up" class="text-3xl font-bold text-white mb-8">Generator Surat Lamaran</h3>
+                    <p class="md:hidden flex items-center justify-center gap-2 p-3 rounded-md bg-yellow-900/30 border border-yellow-700 text-yellow-300 text-sm mb-8 max-w-xl mx-auto">
+                        <i data-lucide="smartphone" class="w-4 h-4 flex-shrink-0"></i>
+                        <span>Gunakan mode Desktop untuk tampilan yang lebih rapi.</span>
+                    </p>
                     <div class="max-w-xl mx-auto space-y-6">
                         <div>
                             <label for="companyName" class="block text-left text-gray-300 mb-2 font-semibold">Nama Perusahaan:</label>
@@ -579,7 +582,7 @@
                         </div>
                 </div> 
                 <div id="tool-philosophy" class="max-w-3xl mx-auto bg-gray-800 border border-gray-700 rounded-lg p-8 md:p-12">
-                    <h3 class="text-3xl font-bold text-white mb-6">Pojok Filsafat</h3>
+                    <h3 data-aos="fade-up" class="text-3xl font-bold text-white mb-6">Pojok Filsafat</h3>
                     <p class="text-lg text-gray-300 mb-8">Butuh sedikit pencerahan atau perspektif baru? Klik tombol di bawah ini.</p>
                     
                     <div id="quoteDisplay" class="min-h-[150px] flex flex-col items-center justify-center p-6 bg-gray-900 border-2 border-dashed border-gray-700 rounded-md mb-8 transition-all duration-300">
