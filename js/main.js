@@ -1,32 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  // --- LOGIKA KUNCI SCROLL MOBILE ---
-  // Dapatkan referensi
-  const menuToggleBtn = document.getElementById("menu-toggle");
-  const mainMenu = document.getElementById("main-menu");
-  const body = document.body;
-
-  if (menuToggleBtn && mainMenu) {
-    menuToggleBtn.addEventListener("click", function () {
-      // 1. Tambah/Hapus kelas 'active' pada menu (seperti yang sudah Anda lakukan)
-      mainMenu.classList.toggle("active");
-
-      // 2. Tambah/Hapus kelas 'no-scroll' pada body
-      body.classList.toggle("no-scroll");
-
-      // (Opsional) Mengubah ikon dari 'menu' menjadi 'x' (tutup)
-      const icon = menuToggleBtn.querySelector("i[data-lucide]");
-      if (mainMenu.classList.contains("active")) {
-        // Jika menu terbuka, ganti ikon menjadi 'x'
-        icon.setAttribute("data-lucide", "x");
-      } else {
-        // Jika menu tertutup, ganti ikon kembali menjadi 'menu'
-        icon.setAttribute("data-lucide", "menu");
-      }
-      // Wajib panggil ini agar ikon lucide berganti
-      lucide.createIcons();
-    });
-  }
-
   // --- LOGIKA GENERATOR SURAT LAMARAN ---
   const generateBtn = document.getElementById("generateLetterBtn");
   const letterResultEl = document.getElementById("letterResult");
