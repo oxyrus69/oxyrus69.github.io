@@ -645,3 +645,34 @@ code {
   color: #ffffff;
   background-color: #4299e1; /* blue-500 */
 }
+
+/* --- GAYA SCROLLBAR KHUSUS MOBILE --- */
+@media (max-width: 768px) {
+  /* 1. Scrollbar Utama (Lebar dan Transparansi) */
+  ::-webkit-scrollbar {
+    width: 6px; /* Membuat scrollbar tipis */
+    background: transparent;
+  }
+
+  /* 2. Track (Jalur Scroll) */
+  ::-webkit-scrollbar-track {
+    background: #1a202c; /* Menggunakan warna latar belakang body Anda */
+  }
+
+  /* 3. Thumb (Pegangan Scroll) */
+  ::-webkit-scrollbar-thumb {
+    background: #4a5568; /* Warna abu-abu gelap */
+    border-radius: 10px;
+    border: 1px solid #1a202c; /* Memberi sedikit jarak dari track */
+  }
+
+  /* 4. Thumb Hover (Opsional) */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #63b3ed; /* Warna biru cerah saat di-hover */
+  }
+}
+
+/* Kelas ini akan ditambahkan ke <body> melalui JavaScript */
+.no-scroll {
+  overflow: hidden !important; /* Mencegah scrolling pada body */
+}
